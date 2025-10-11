@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using VideoHostingApi.Auth.Context;
+
 namespace VideoHostingApi.Auth.Web;
 
 public class Program
@@ -5,17 +8,18 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        
 
-        // Add services to the container.
+        builder.Services.AddDbContext<AuthContext>(options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDbConnection")));
+        
 
         builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
+        
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
