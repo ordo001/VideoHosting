@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using VideoHosting.FileService.Context;
+
 namespace VideoHostingApi.FileService.Web;
 
 public class Program
@@ -6,10 +9,10 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        builder.Services.AddDbContext<FileContext>(opt => 
+            opt.UseNpgsql(builder.Configuration.GetConnectionString("FileDbConnection")));
 
         builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 

@@ -20,6 +20,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Context", "VideoHostingApi.Common.Context\VideoHostingApi.Common.Context.csproj", "{40670DF9-F59E-443F-BDEE-6A26A2E3AA5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHosting.FileService.Context", "VideoHosting.FileService.Context\VideoHosting.FileService.Context.csproj", "{BF4187B2-BC49-4CF0-AFB9-6809FB0E47EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHosting.FileSerivce.Entities", "VideoHosting.FileSerivce.Entities\VideoHosting.FileSerivce.Entities.csproj", "{013E7438-9253-40AD-8D14-BAC2779B484B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHosting.Entities.Configuration", "VideoHosting.Entities.Configuration\VideoHosting.Entities.Configuration.csproj", "{B26F2DEA-C449-4D66-937A-3FEB9856652C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +60,18 @@ Global
 		{40670DF9-F59E-443F-BDEE-6A26A2E3AA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40670DF9-F59E-443F-BDEE-6A26A2E3AA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40670DF9-F59E-443F-BDEE-6A26A2E3AA5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF4187B2-BC49-4CF0-AFB9-6809FB0E47EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF4187B2-BC49-4CF0-AFB9-6809FB0E47EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF4187B2-BC49-4CF0-AFB9-6809FB0E47EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF4187B2-BC49-4CF0-AFB9-6809FB0E47EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{013E7438-9253-40AD-8D14-BAC2779B484B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{013E7438-9253-40AD-8D14-BAC2779B484B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{013E7438-9253-40AD-8D14-BAC2779B484B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{013E7438-9253-40AD-8D14-BAC2779B484B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B26F2DEA-C449-4D66-937A-3FEB9856652C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B26F2DEA-C449-4D66-937A-3FEB9856652C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B26F2DEA-C449-4D66-937A-3FEB9856652C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B26F2DEA-C449-4D66-937A-3FEB9856652C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B76315FB-2EEB-4BB9-A8ED-984765634884} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}
@@ -63,5 +81,8 @@ Global
 		{D9A190A4-077B-40BA-BFF1-A96BBDD7D606} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}
 		{984EBFD0-C0D1-4CC1-B881-5F1C0B6DD71A} = {A1001522-7BA2-4E35-86D8-87A69E9A2A85}
 		{40670DF9-F59E-443F-BDEE-6A26A2E3AA5B} = {A1001522-7BA2-4E35-86D8-87A69E9A2A85}
+		{BF4187B2-BC49-4CF0-AFB9-6809FB0E47EF} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
+		{013E7438-9253-40AD-8D14-BAC2779B484B} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
+		{B26F2DEA-C449-4D66-937A-3FEB9856652C} = {A1001522-7BA2-4E35-86D8-87A69E9A2A85}
 	EndGlobalSection
 EndGlobal
