@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\VideoHostingApi.Common.Context\VideoHostingApi.Common.Context.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.Common.Entities\VideoHostingApi.Common.Entities.csproj" />
+    </ItemGroup>
+
+</Project>
