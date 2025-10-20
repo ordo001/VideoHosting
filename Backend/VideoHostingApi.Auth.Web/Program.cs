@@ -13,6 +13,7 @@ public class Program
         builder.Services.AddDbContext<AuthContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDbConnection")));
         
+        
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();

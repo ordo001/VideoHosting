@@ -16,11 +16,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+      <ProjectReference Include="..\VideoHosting.FileService.Context\VideoHosting.FileService.Context.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\VideoHosting.FileService.Context\VideoHosting.FileService.Context.csproj" />
+      <Folder Include="Controllers\" />
     </ItemGroup>
 
 </Project>
