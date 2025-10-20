@@ -16,11 +16,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\VideoHosting.Auth.Repositories.Contracts\VideoHosting.Auth.Repositories.Contracts.csproj" />
       <ProjectReference Include="..\VideoHostingApi.Auth.Context\VideoHostingApi.Auth.Context.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers\" />
+      <ProjectReference Include="..\VideoHostingApi.Auth.Repositories\VideoHostingApi.Auth.Repositories.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.Common.Web\VideoHostingApi.Common.Web.csproj" />
     </ItemGroup>
 
 </Project>

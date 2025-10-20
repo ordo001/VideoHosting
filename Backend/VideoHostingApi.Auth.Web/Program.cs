@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using VideoHostingApi.Auth.Context;
+using VideoHostingApi.Auth.Web.Extensions;
 
 namespace VideoHostingApi.Auth.Web;
 
@@ -12,9 +13,9 @@ public class Program
 
         builder.Services.AddDbContext<AuthContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDbConnection")));
-        
-        
 
+        builder.Services.AddServices();
+        
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

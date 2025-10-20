@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\VideoHosting.Common.Repositories\VideoHosting.Common.Repositories.csproj" />
-      <ProjectReference Include="..\VideoHostingApi.Auth.Entities\VideoHostingApi.Auth.Entities.csproj" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
     </ItemGroup>
 
 </Project>

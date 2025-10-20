@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\VideoHostingApi.Common.Context\VideoHostingApi.Common.Context.csproj" />
       <ProjectReference Include="..\VideoHostingApi.Common.Entities\VideoHostingApi.Common.Entities.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.Common.Repositories.Contracts\VideoHostingApi.Common.Repositories.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

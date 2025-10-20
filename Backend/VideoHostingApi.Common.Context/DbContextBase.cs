@@ -2,10 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace VideoHostingApi.Common.Context;
 
-public abstract class DbContextBase<TConfigurationAnchor> : DbContext
+public abstract class DbContextBase<TConfigurationAnchor>(DbContextOptions options) : DbContext(options)
 {
-    public DbContextBase(DbContextOptions options) : base(options){ }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
