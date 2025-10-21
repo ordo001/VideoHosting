@@ -12,37 +12,34 @@ services:
       - "5433:5432"
     volumes:
       - auth_data:/var/lib/postgresql/data
-        
-        
+  
+  
   # === Auth Service ===
   auth.api:
     build:
-#      context: .
       dockerfile: /VideoHostingApi.Auth.Web/Dockerfile
     ports:
       - "5001:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__AuthDb=Host=VideoHostingAuthDb;Port=5432;Database=AuthDb;Username=postgres;Password=Qwerty123456!
+    depends_on:
+      - VideoHostingAuthDb
+
+
+    # === File Service ===
+  file.api:
+    build:
+      dockerfile: /VideoHostingApi.FileService.Web/Dockerfile
+    ports:
+      - "5002:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - MINIO_ENDPOINT=VideoHostingS3:9000
       - MINIO_ACCESS_KEY=minioadmin
       - MINIO_SECRET_KEY=minioadmin
     depends_on:
-      - VideoHostingAuthDb
       - VideoHostingS3
-
-
-  # === PostgreSQL для Order ===
-#  order.db:
-#    image: postgres:latest
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: postgres
-#      POSTGRES_DB: orderdb
-#    ports:
-#      - "5434:5432"
-#    volumes:
-#      - order_data:/var/lib/postgresql/data
 
   # === MinIO ===
   VideoHostingS3:
@@ -72,5 +69,4 @@ services:
 
 volumes:
   auth_data:
-#  order_data:
   minio_data:

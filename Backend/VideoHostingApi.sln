@@ -36,6 +36,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Auth.Reposi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Repositories.Contracts", "VideoHostingApi.Common.Repositories.Contracts\VideoHostingApi.Common.Repositories.Contracts.csproj", "{066C243A-1198-48B8-B152-FCA33B5ADE26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Service.Contracts", "VideoHostingApi.FileService.Service.Contracts\VideoHostingApi.FileService.Service.Contracts.csproj", "{22190736-151A-466A-B853-2325B191C9B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Service", "VideoHostingApi.FileService.Service\VideoHostingApi.FileService.Service.csproj", "{16EFC04E-2CF7-4544-BC7A-B97CD854292F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Repositories.Contracts", "VideoHostingApi.FileService.Repositories.Contracts\VideoHostingApi.FileService.Repositories.Contracts.csproj", "{BEBA1A71-F0A8-4140-9D4A-0CDBDAC8709F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Repositories", "VideoHostingApi.FileService.Repositories\VideoHostingApi.FileService.Repositories.csproj", "{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +110,22 @@ Global
 		{066C243A-1198-48B8-B152-FCA33B5ADE26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{066C243A-1198-48B8-B152-FCA33B5ADE26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{066C243A-1198-48B8-B152-FCA33B5ADE26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22190736-151A-466A-B853-2325B191C9B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22190736-151A-466A-B853-2325B191C9B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22190736-151A-466A-B853-2325B191C9B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22190736-151A-466A-B853-2325B191C9B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16EFC04E-2CF7-4544-BC7A-B97CD854292F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16EFC04E-2CF7-4544-BC7A-B97CD854292F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16EFC04E-2CF7-4544-BC7A-B97CD854292F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16EFC04E-2CF7-4544-BC7A-B97CD854292F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEBA1A71-F0A8-4140-9D4A-0CDBDAC8709F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEBA1A71-F0A8-4140-9D4A-0CDBDAC8709F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEBA1A71-F0A8-4140-9D4A-0CDBDAC8709F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEBA1A71-F0A8-4140-9D4A-0CDBDAC8709F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B76315FB-2EEB-4BB9-A8ED-984765634884} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}
@@ -119,5 +143,9 @@ Global
 		{9B73E000-F988-43F4-A3C2-F734C1DD7718} = {A1001522-7BA2-4E35-86D8-87A69E9A2A85}
 		{7741D789-ED57-4457-8234-59BCB391A444} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}
 		{066C243A-1198-48B8-B152-FCA33B5ADE26} = {A1001522-7BA2-4E35-86D8-87A69E9A2A85}
+		{22190736-151A-466A-B853-2325B191C9B1} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
+		{16EFC04E-2CF7-4544-BC7A-B97CD854292F} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
+		{BEBA1A71-F0A8-4140-9D4A-0CDBDAC8709F} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
+		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
 	EndGlobalSection
 EndGlobal
