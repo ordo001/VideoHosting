@@ -1,0 +1,76 @@
+version: '3.9'
+
+services:
+  # === PostgreSQL для Auth ===
+  VideoHostingAuthDb:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Qwerty123456!
+      POSTGRES_DB: AuthDb
+    ports:
+      - "5433:5432"
+    volumes:
+      - auth_data:/var/lib/postgresql/data
+        
+        
+  # === Auth Service ===
+  auth.api:
+    build:
+#      context: .
+      dockerfile: /VideoHostingApi.Auth.Web/Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__AuthDb=Host=VideoHostingAuthDb;Port=5432;Database=AuthDb;Username=postgres;Password=Qwerty123456!
+      - MINIO_ENDPOINT=VideoHostingS3:9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
+    depends_on:
+      - VideoHostingAuthDb
+      - VideoHostingS3
+
+
+  # === PostgreSQL для Order ===
+#  order.db:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: orderdb
+#    ports:
+#      - "5434:5432"
+#    volumes:
+#      - order_data:/var/lib/postgresql/data
+
+  # === MinIO ===
+  VideoHostingS3:
+    image: minio/minio:latest
+    container_name: VideoHostingS3
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
+  # === Nginx (reverse proxy) ===
+#  nginx:
+#    image: nginx:latest
+#    container_name: nginx
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./Nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+#    depends_on:
+#      - auth.api
+#      - order.api
+
+volumes:
+  auth_data:
+#  order_data:
+  minio_data:

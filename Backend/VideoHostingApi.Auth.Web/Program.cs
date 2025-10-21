@@ -12,7 +12,7 @@ public class Program
         
 
         builder.Services.AddDbContext<AuthContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDbConnection")));
+            options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDb")));
 
         builder.Services.AddServices();
         
@@ -21,6 +21,13 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
+        
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<AuthContext>();
+            db.Database.Migrate();
+        }
+
         
         if (app.Environment.IsDevelopment())
         {
