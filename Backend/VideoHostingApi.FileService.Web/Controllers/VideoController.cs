@@ -8,11 +8,18 @@ namespace VideoHostingApi.FileService.Web.Controllers;
 public class VideoController(IVideoService videoService) : ControllerBase
 {
 
-    [HttpGet]
-    public async Task<IActionResult> Test()
+    [HttpPost("Upload")]
+    public async Task<IActionResult> UploadFile(IFormFile file, CancellationToken cancellationToken)
     {
-        await videoService.DownloadFile("a");
-                
+        var stream = file.OpenReadStream();
+        await videoService.UploadFile(file.FileName, stream, file.ContentType, cancellationToken);
         return Ok();
+    }
+    
+    [HttpGet("Download")]
+    public async Task<IActionResult> DownloadFile(string name, CancellationToken cancellationToken)
+    {
+        var result = await videoService.DownloadFile(name, cancellationToken);
+        return File(result.FileStream, result.ContentType, name);
     }
 }

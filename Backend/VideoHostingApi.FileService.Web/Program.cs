@@ -16,8 +16,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddDbContext<FileContext>(opt => 
-            opt.UseNpgsql(builder.Configuration.GetConnectionString("FileDbConnection")));
+        /*builder.Services.AddDbContext<FileContext>(opt => 
+            opt.UseNpgsql(builder.Configuration.GetConnectionString("FileDbConnection")));*/
 
         builder.Services.AddScoped<IVideoService, VideoService>();
 
@@ -29,7 +29,7 @@ public class Program
         builder.Services.AddSingleton(minioClient);
 
         builder.Services.AddScoped<IMinioRepository<Video>>(sp =>
-            new MinioRepository<Video>(minioClient, builder.Configuration["MinioBuckets:Videos"]!));
+            new MinioRepository<Video>(minioClient, builder.Configuration["MinioBuckets:videos"]!));
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
