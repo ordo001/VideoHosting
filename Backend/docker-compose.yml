@@ -13,16 +13,28 @@ services:
     volumes:
       - auth_data:/var/lib/postgresql/data
   
+  # === Gateway ===
+  gateway.api:
+    build:
+      dockerfile: /VideoHostingApi.Gateway.Web/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ConnectionStrings__AuthDb=Host=VideoHostingAuthDb;Port=5432;Database=AuthDb;Username=postgres;Password=Qwerty123456!
+    depends_on:
+      - auth.api
+      - file.api
   
   # === Auth Service ===
   auth.api:
     build:
       dockerfile: /VideoHostingApi.Auth.Web/Dockerfile
-    ports:
-      - "5001:8080"
     environment:
+      - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__AuthDb=Host=VideoHostingAuthDb;Port=5432;Database=AuthDb;Username=postgres;Password=Qwerty123456!
+    ports:
+      - 8081:8080
     depends_on:
       - VideoHostingAuthDb
 
@@ -31,13 +43,14 @@ services:
   file.api:
     build:
       dockerfile: /VideoHostingApi.FileService.Web/Dockerfile
-    ports:
-      - "5002:8081"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
       - MINIO_ENDPOINT=VideoHostingS3:9000
       - MINIO_ACCESS_KEY=minioadmin
       - MINIO_SECRET_KEY=minioadmin
+    ports:
+      - 8082:8080
     depends_on:
       - VideoHostingS3
 
@@ -54,18 +67,6 @@ services:
     command: server /data --console-address ":9001"
     volumes:
       - minio_data:/data
-
-  # === Nginx (reverse proxy) ===
-#  nginx:
-#    image: nginx:latest
-#    container_name: nginx
-#    ports:
-#      - "80:80"
-#    volumes:
-#      - ./Nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-#    depends_on:
-#      - auth.api
-#      - order.api
 
 volumes:
   auth_data:

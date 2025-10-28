@@ -22,7 +22,7 @@ public class Program
         builder.Services.AddScoped<IVideoService, VideoService>();
 
         var minioClient = new MinioClient()
-            .WithEndpoint(builder.Configuration["Minio:Endpoint"])
+            .WithEndpoint(builder.Configuration["Minio:PublicEndpoint"])
             .WithCredentials(builder.Configuration["Minio:AccessKey"], builder.Configuration["Minio:SecretKey"])
             .Build();
         

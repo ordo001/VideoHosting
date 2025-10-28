@@ -22,4 +22,11 @@ public class VideoController(IVideoService videoService) : ControllerBase
         var result = await videoService.DownloadFile(name, cancellationToken);
         return File(result.FileStream, result.ContentType, name);
     }
+
+    [HttpGet("GetPresignedDownloadUrl")]
+    public async Task<IActionResult> GetPresignedDownloadUrl(string name, CancellationToken cancellationToken)
+    {
+        var result = await videoService.GetPresignedDownloadUrl(name, cancellationToken);
+        return Ok(result);
+    }
 }
