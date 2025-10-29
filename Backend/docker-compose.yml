@@ -16,10 +16,11 @@ services:
   # === Gateway ===
   gateway.api:
     build:
-      dockerfile: /VideoHostingApi.Gateway.Web/Dockerfile
+      dockerfile: VideoHostingApi.Gateway.Web/Dockerfile
     ports:
       - "8080:8080"
     environment:
+      - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__AuthDb=Host=VideoHostingAuthDb;Port=5432;Database=AuthDb;Username=postgres;Password=Qwerty123456!
     depends_on:
       - auth.api
@@ -28,7 +29,7 @@ services:
   # === Auth Service ===
   auth.api:
     build:
-      dockerfile: /VideoHostingApi.Auth.Web/Dockerfile
+      dockerfile: VideoHostingApi.Auth.Web/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_ENVIRONMENT=Development
@@ -42,7 +43,7 @@ services:
     # === File Service ===
   file.api:
     build:
-      dockerfile: /VideoHostingApi.FileService.Web/Dockerfile
+      dockerfile: VideoHostingApi.FileService.Web/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080

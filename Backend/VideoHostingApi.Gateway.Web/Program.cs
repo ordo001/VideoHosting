@@ -1,10 +1,11 @@
 using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
 namespace VideoHostingApi.Gateway.Web;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -24,13 +25,12 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+       // app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
-
         app.MapControllers();
-
-        app.Run();
+        
+        await app.UseOcelot();
+        await app.RunAsync();
     }
 }

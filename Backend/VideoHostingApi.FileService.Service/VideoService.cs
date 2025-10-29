@@ -6,13 +6,13 @@ using VideoHostingApi.FileService.Service.Contracts.Models;
 
 namespace VideoHostingApi.FileService.Service;
 
-public class VideoService(IMinioRepository<Video> minioRepository) : IVideoService
+public class VideoService(IMinioRepository<Video> minioRepository ) : IVideoService
 {
     public async Task<string> GetPresignedUploadUrl(string name, CancellationToken cancellationToken)
     { 
         await minioRepository.EnsureBucketExistsAsync(cancellationToken);
-        var ulr = await minioRepository.GetPresignedUploadUrl(name);
-        return ulr;
+        var url = await minioRepository.GetPresignedUploadUrl(name);
+        return url;
     }
 
     public async Task<string> GetPresignedDownloadUrl(string name, CancellationToken cancellationToken)
@@ -20,8 +20,8 @@ public class VideoService(IMinioRepository<Video> minioRepository) : IVideoServi
         try
         {
             await minioRepository.EnsureBucketExistsAsync(cancellationToken);
-            var ulr = await minioRepository.GetPresignedDownloadUrl(name);
-            return ulr;
+            var url = await minioRepository.GetPresignedDownloadUrl(name);
+            return url;
         }
         catch (ObjectNotFoundException ex)
         {
@@ -41,7 +41,7 @@ public class VideoService(IMinioRepository<Video> minioRepository) : IVideoServi
         {
             await minioRepository.EnsureBucketExistsAsync(cancellationToken);
             var model = await minioRepository.DownloadFile(name, cancellationToken);
-            return new FileModel(){ FileStream = model.FileStream, ContentType = model.ContentType, FileName = model.FileName };
+            return new FileModel{ FileStream = model.FileStream, ContentType = model.ContentType, FileName = model.FileName }; // TODO: Заменить на автомаппинг
         }
         catch (ObjectNotFoundException ex)
         {

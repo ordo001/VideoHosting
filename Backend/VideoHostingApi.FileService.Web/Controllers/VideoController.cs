@@ -3,7 +3,7 @@ using VideoHostingApi.FileService.Service.Contracts;
 
 namespace VideoHostingApi.FileService.Web.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class VideoController(IVideoService videoService) : ControllerBase
 {
@@ -29,4 +29,19 @@ public class VideoController(IVideoService videoService) : ControllerBase
         var result = await videoService.GetPresignedDownloadUrl(name, cancellationToken);
         return Ok(result);
     }
+
+    [HttpGet("GetUploadUrl")]
+    public async Task<IActionResult> GetUploadUrl(string fileName, CancellationToken cancellationToken)
+    {
+        var url = await videoService.GetPresignedUploadUrl(fileName, cancellationToken);
+        return Ok(url);
+    }
+    
+    [HttpGet("GetDownloadUrl")]
+    public async Task<IActionResult> GetDownloadUrl(string fileName, CancellationToken cancellationToken)
+    {
+        var url = await videoService.GetPresignedDownloadUrl(fileName, cancellationToken);
+        return Ok(url);
+    }
+    
 }

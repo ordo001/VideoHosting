@@ -1,11 +1,11 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamPathTemplate": "/swagger/{everything}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [ { "Host": "auth.api", "Port": 8080 } ],
-      "UpstreamPathTemplate": "/auth/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "DownstreamHostAndPorts": [ { "Host": "file.api", "Port": 8080 } ],
+      "UpstreamPathTemplate": "/file/swagger/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
     },
     {
       "DownstreamPathTemplate": "/file/video/{everything}",
@@ -13,6 +13,20 @@
       "DownstreamHostAndPorts": [ { "Host": "file.api", "Port": 8080 } ],
       "UpstreamPathTemplate": "/file/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "auth.api", "Port": 8080 } ],
+      "UpstreamPathTemplate": "/auth/swagger/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "auth.api", "Port": 8080 } ],
+      "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     }
   ],
   "GlobalConfiguration": {

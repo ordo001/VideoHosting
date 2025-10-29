@@ -35,7 +35,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         
-        builder.WebHost.UseUrls("http://0.0.0.0:8081"); 
+        builder.WebHost.UseUrls("http://0.0.0.0:8080"); 
 
 
         var app = builder.Build();
@@ -47,7 +47,7 @@ public class Program
             app.UseSwaggerUI();
         }
         
-        app.UseHttpsRedirection();
+       //app.UseHttpsRedirection();
 
         app.UseAuthorization();
 
