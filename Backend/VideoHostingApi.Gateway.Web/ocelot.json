@@ -8,10 +8,10 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/file/video/{everything}",
+      "DownstreamPathTemplate": "/Video/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [ { "Host": "file.api", "Port": 8080 } ],
-      "UpstreamPathTemplate": "/file/{everything}",
+      "UpstreamPathTemplate": "/Video/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
     },
     {
@@ -22,7 +22,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamPathTemplate": "/auth/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [ { "Host": "auth.api", "Port": 8080 } ],
       "UpstreamPathTemplate": "/auth/{everything}",
