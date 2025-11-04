@@ -1,5 +1,6 @@
 using Minio;
 using Minio.DataModel.Args;
+using VideoHostingApi.FileService.Entities;
 using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Repositories.Contracts.Models;
 
@@ -8,7 +9,7 @@ namespace VideoHostingApi.FileService.Repositories;
 /// <summary>
 /// Репозиторий для доступа к S3 хранилищу Minio
 /// </summary>
-public class MinioRepository<T>(IMinioClient minioClient, string bucketName) : IMinioRepository<T> where T : class 
+public class MinioRepository<T>(IMinioClient minioClient, string bucketName) : IObjectStorageRepository<T> where T : class 
 {
     
     public async Task<string> GetPresignedUploadUrl(string name)
@@ -16,7 +17,7 @@ public class MinioRepository<T>(IMinioClient minioClient, string bucketName) : I
         var args = new PresignedPutObjectArgs()
             .WithBucket(bucketName)
             .WithObject(name)
-            .WithExpiry(3600); // TODO: Заменить на константу
+            .WithExpiry(FileServiceConstants.UrlExpiry);
         
         var url = await minioClient.PresignedPutObjectAsync(args);
         return url;
@@ -27,7 +28,7 @@ public class MinioRepository<T>(IMinioClient minioClient, string bucketName) : I
         var args = new PresignedGetObjectArgs()
             .WithBucket(bucketName)
             .WithObject(name)
-            .WithExpiry(3600); // TODO: Заменить на константу
+            .WithExpiry(FileServiceConstants.UrlExpiry);
         
         var url = await minioClient.PresignedGetObjectAsync(args);
         

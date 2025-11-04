@@ -8,11 +8,13 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/Video/{everything}",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [ { "Host": "file.api", "Port": 8080 } ],
-      "UpstreamPathTemplate": "/Video/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+      "DownstreamHostAndPorts": [
+        { "Host": "file.api", "Port": 8080 }
+      ],
+      "UpstreamPathTemplate": "/file/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
     {
       "DownstreamPathTemplate": "/swagger/{everything}",

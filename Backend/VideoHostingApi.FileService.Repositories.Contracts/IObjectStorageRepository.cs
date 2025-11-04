@@ -3,9 +3,9 @@ using VideoHostingApi.FileService.Repositories.Contracts.Models;
 namespace VideoHostingApi.FileService.Repositories.Contracts;
 
 /// <summary>
-/// Репозиторий для доступа к данным S3 хранилища Minio
+/// Репозиторий для доступа к данным S3
 /// </summary>
-public interface IMinioRepository<T> where T : class
+public interface IObjectStorageRepository<T> where T : class
 {
     /// <summary>
     /// Полчить ссылку на загрузку файла в хранилище
