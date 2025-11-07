@@ -3,7 +3,7 @@ version: '3.9'
 services:
   # === PostgreSQL для Auth ===
   VideoHostingAuthDb:
-    image: postgres:latest
+    image: postgres:15-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Qwerty123456!
@@ -12,6 +12,18 @@ services:
       - "5433:5432"
     volumes:
       - auth_data:/var/lib/postgresql/data
+        
+  # === PostgreSQL для FileService ===
+  VideoHostingFileDb:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Qwerty123456!
+      POSTGRES_DB: FileDb
+    ports:
+      - "5434:5432"
+    volumes:
+      - file_data:/var/lib/postgresql/data
   
   # === Gateway ===
   gateway.api:
@@ -45,8 +57,9 @@ services:
     build:
       dockerfile: VideoHostingApi.FileService.Web/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__FileDb=Host=VideoHostingFileDb;Port=5432;Database=FileDb;Username=postgres;Password=Qwerty123456!
       - MINIO_ENDPOINT=VideoHostingS3:9000
       - MINIO_ACCESS_KEY=minioadmin
       - MINIO_SECRET_KEY=minioadmin
@@ -54,6 +67,7 @@ services:
       - 8082:8080
     depends_on:
       - VideoHostingS3
+      - VideoHostingFileDb
 
   # === MinIO ===
   VideoHostingS3:
@@ -71,4 +85,5 @@ services:
 
 volumes:
   auth_data:
+  file_data:
   minio_data:

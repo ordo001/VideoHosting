@@ -16,7 +16,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddDbContext<FileServiceContext>(opt => 
-            opt.UseNpgsql(builder.Configuration.GetConnectionString("FileServiceDbConnection")));
+            opt.UseNpgsql(builder.Configuration.GetConnectionString("FileDbConnection")));
 
         builder.Services.AddScoped<IVideoService, VideoService>();
 

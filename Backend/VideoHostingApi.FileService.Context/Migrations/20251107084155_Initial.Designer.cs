@@ -12,7 +12,7 @@ using VideoHostingApi.FileService.Context;
 namespace VideoHostingApi.FileService.Context.Migrations
 {
     [DbContext(typeof(FileServiceContext))]
-    [Migration("20251104125640_Initial")]
+    [Migration("20251107084155_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
