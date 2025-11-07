@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.20" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.20" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.20">
           <PrivateAssets>all</PrivateAssets>
@@ -20,6 +21,8 @@
       <ProjectReference Include="..\VideoHosting.Auth.Repositories.Contracts\VideoHosting.Auth.Repositories.Contracts.csproj" />
       <ProjectReference Include="..\VideoHostingApi.Auth.Context\VideoHostingApi.Auth.Context.csproj" />
       <ProjectReference Include="..\VideoHostingApi.Auth.Repositories\VideoHostingApi.Auth.Repositories.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.Auth.Services.Contracts\VideoHostingApi.Auth.Services.Contracts.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.Auth.Services\VideoHostingApi.Auth.Services.csproj" />
       <ProjectReference Include="..\VideoHostingApi.Common.Web\VideoHostingApi.Common.Web.csproj" />
     </ItemGroup>
 

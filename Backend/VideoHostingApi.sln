@@ -22,11 +22,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Entities", "VideoHostingApi.FileService.Entities\VideoHostingApi.FileService.Entities.csproj", "{013E7438-9253-40AD-8D14-BAC2779B484B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHosting.Entities.Configuration", "VideoHosting.Entities.Configuration\VideoHosting.Entities.Configuration.csproj", "{B26F2DEA-C449-4D66-937A-3FEB9856652C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Entities.Configuration", "VideoHostingApi.Common.Entities.Configuration\VideoHostingApi.Common.Entities.Configuration.csproj", "{B26F2DEA-C449-4D66-937A-3FEB9856652C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHosting.Auth.Repositories.Contracts", "VideoHosting.Auth.Repositories.Contracts\VideoHosting.Auth.Repositories.Contracts.csproj", "{EC7471DD-3308-4A19-8079-06D431A0C1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHosting.Common.Repositories", "VideoHosting.Common.Repositories\VideoHosting.Common.Repositories.csproj", "{7C8C3A7C-495B-42E3-9DC3-9AE8120C7F4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Repositories", "VideoHostingApi.Common.Repositories\VideoHostingApi.Common.Repositories.csproj", "{7C8C3A7C-495B-42E3-9DC3-9AE8120C7F4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Web", "VideoHostingApi.Common.Web\VideoHostingApi.Common.Web.csproj", "{9B73E000-F988-43F4-A3C2-F734C1DD7718}"
 EndProject
@@ -49,6 +49,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Entities.Configuration", "VideoHostingApi.FileService.Entities.Configuration\VideoHostingApi.FileService.Entities.Configuration.csproj", "{4149CF5F-CB3F-49DD-B824-C1AE73710708}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Context", "VideoHostingApi.FileService.Context\VideoHostingApi.FileService.Context.csproj", "{3F0EE1B9-5053-4B8B-8871-98FC9E5D6D0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Auth.Services.Contracts", "VideoHostingApi.Auth.Services.Contracts\VideoHostingApi.Auth.Services.Contracts.csproj", "{D9CAD4EA-D24D-4527-8E51-075F18256040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Auth.Services", "VideoHostingApi.Auth.Services\VideoHostingApi.Auth.Services.csproj", "{55FC140A-51CE-4981-BECA-681F0418A003}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,6 +144,14 @@ Global
 		{3F0EE1B9-5053-4B8B-8871-98FC9E5D6D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F0EE1B9-5053-4B8B-8871-98FC9E5D6D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F0EE1B9-5053-4B8B-8871-98FC9E5D6D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9CAD4EA-D24D-4527-8E51-075F18256040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9CAD4EA-D24D-4527-8E51-075F18256040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9CAD4EA-D24D-4527-8E51-075F18256040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CAD4EA-D24D-4527-8E51-075F18256040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55FC140A-51CE-4981-BECA-681F0418A003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55FC140A-51CE-4981-BECA-681F0418A003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55FC140A-51CE-4981-BECA-681F0418A003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55FC140A-51CE-4981-BECA-681F0418A003}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B76315FB-2EEB-4BB9-A8ED-984765634884} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}
@@ -163,5 +175,7 @@ Global
 		{2A3AEE56-4E30-43FE-97A1-C77486B73834} = {1692D001-DC63-421B-BEE4-85BD05BB268D}
 		{4149CF5F-CB3F-49DD-B824-C1AE73710708} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
 		{3F0EE1B9-5053-4B8B-8871-98FC9E5D6D0E} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
+		{D9CAD4EA-D24D-4527-8E51-075F18256040} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}
+		{55FC140A-51CE-4981-BECA-681F0418A003} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}
 	EndGlobalSection
 EndGlobal

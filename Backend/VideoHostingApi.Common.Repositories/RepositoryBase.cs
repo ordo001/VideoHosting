@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using VideoHostingApi.Common.Entities;
 using VideoHostingApi.Common.Repositories.Contracts;
 
-namespace VideoHosting.Common.Repositories;
+namespace VideoHostingApi.Common.Repositories;
 
 /// <summary>
 /// Базовый репозиторий для доступа к данных БД
