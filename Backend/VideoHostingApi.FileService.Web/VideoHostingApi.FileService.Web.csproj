@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\VideoHostingApi.Common.Web\VideoHostingApi.Common.Web.csproj" />
       <ProjectReference Include="..\VideoHostingApi.FileService.Context\VideoHostingApi.FileService.Context.csproj" />
       <ProjectReference Include="..\VideoHostingApi.FileService.Entities\VideoHostingApi.FileService.Entities.csproj" />
       <ProjectReference Include="..\VideoHostingApi.FileService.Repositories.Contracts\VideoHostingApi.FileService.Repositories.Contracts.csproj" />
@@ -31,6 +32,10 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controllers\Models\" />
     </ItemGroup>
 
 </Project>

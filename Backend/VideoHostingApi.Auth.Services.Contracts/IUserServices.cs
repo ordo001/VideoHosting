@@ -8,7 +8,7 @@ namespace VideoHostingApi.Auth.Services.Contracts;
 public interface IUserServices
 {
     /// <summary>
-    /// Получить пользователя пои логину
+    /// Получить пользователя по логину
     /// </summary>
     public Task<UserModel> GetUserByLogin(string login, CancellationToken cancellationToken);
     
@@ -26,4 +26,14 @@ public interface IUserServices
     /// Добавить пользователя
     /// </summary>
     public Task Add(AddUserModel model, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Удалить пользовалея
+    /// </summary>
+    public Task Remove(Guid id, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Обновить пользователя
+    /// </summary>
+    public Task Update(UpdateUserModel model, CancellationToken cancellationToken);
 }

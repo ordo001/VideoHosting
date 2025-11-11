@@ -12,14 +12,15 @@ namespace VideoHostingApi.Auth.Services;
 /// <summary>
 /// Генератор токенов
 /// </summary>
-public class TokenGenerator(TokenGeneratorOptions options, IUserRepository userRepository) : ITokenGenerator 
+public class TokenGenerator(TokenGeneratorOptions options,
+    IUserRepository userRepository) : ITokenGenerator, IAuthServiceAnchor
 {
-    public async Task<Token> GenerateToken(LoginRequest loginRequest, CancellationToken cancellationToken)
+    public async Task<Token> GenerateToken(LoginModel loginModel, CancellationToken cancellationToken)
     {
-        var user = await userRepository.GetByLogin(loginRequest.Login, cancellationToken);
+        var user = await userRepository.GetByLogin(loginModel.Login, cancellationToken);
         if (user is null)
         {
-            throw new EntityNotFoundException($"Пользователь с логином {loginRequest.Login} не найден");
+            throw new EntityNotFoundException($"Пользователь с логином {loginModel.Login} не найден");
         }
             
         var claims = new List<Claim>

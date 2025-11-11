@@ -10,5 +10,5 @@ public interface ITokenGenerator
     /// <summary>
     /// Сгенерировать токен для запроса на вход
     /// </summary>
-    public Task<Token> GenerateToken(LoginRequest loginRequest, CancellationToken cancellationToken);
+    public Task<Token> GenerateToken(LoginModel loginRequest, CancellationToken cancellationToken);
 }

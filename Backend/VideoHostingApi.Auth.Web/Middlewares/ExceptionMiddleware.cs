@@ -1,12 +1,11 @@
 using System.Text.Json;
-using Minio.Exceptions;
-using ErrorResponse = VideoHostingApi.Common.Web.Models.ErrorResponse;
+using VideoHostingApi.Auth.Services.Contracts.Exceptions;
+using VideoHostingApi.Common.Web.Models;
 
-namespace VideoHostingApi.FileService.Web.Middlewares;
+namespace VideoHostingApi.Auth.Web.Middlewares;
 
 public class ExceptionMiddleware(RequestDelegate next)
 {
-    
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -22,11 +21,16 @@ public class ExceptionMiddleware(RequestDelegate next)
 
             switch (ex)
             {
-                case BucketNotFoundException bucketNotFoundException:
+
+                case EntityNotFoundException entityNotFoundException: 
                     response.StatusCode = StatusCodes.Status404NotFound;
-                    error.Message = bucketNotFoundException.Message;
+                    error.Message = entityNotFoundException.Message;
                     break;
                 
+                case EntityIsExistException entityIsExistException: 
+                    response.StatusCode = StatusCodes.Status400BadRequest;
+                    error.Message = entityIsExistException.Message;
+                    break;
 
                 default:
                     response.StatusCode = StatusCodes.Status500InternalServerError;

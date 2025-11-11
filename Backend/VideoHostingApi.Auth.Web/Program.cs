@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using VideoHostingApi.Auth.Context;
 using VideoHostingApi.Auth.Web.Extensions;
+using VideoHostingApi.Auth.Web.Middlewares;
 
 namespace VideoHostingApi.Auth.Web;
 
@@ -18,7 +19,8 @@ public class Program
             options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDbConnection")));
 
         builder.Services.AddServices();
-
+        builder.Services.RegisterAutoMapper();
+        
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
@@ -69,6 +71,7 @@ public class Program
             db.Database.Migrate();
         }
 
+        app.UseMiddleware<ExceptionMiddleware>();
 
         if (app.Environment.IsDevelopment())
         {

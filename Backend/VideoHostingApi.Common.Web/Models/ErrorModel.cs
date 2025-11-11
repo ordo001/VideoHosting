@@ -1,4 +1,4 @@
-namespace VideoHostingApi.FileService.Web.Controllers.Models;
+namespace VideoHostingApi.Common.Web.Models;
 
 /// <summary>
 /// Модель ответа при ошибке

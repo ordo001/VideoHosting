@@ -1,24 +1,26 @@
 namespace VideoHostingApi.Auth.Services.Contracts.Models;
 
-/// <summary>
-/// Модель пользователя на добавление
-/// </summary>
-public class AddUserModel
+public class UpdateUserModel
 {
     /// <summary>
-    /// Логин пользователя
+    /// Идентификатор пользователя
     /// </summary>
-    public string Login { get; set; } =  string.Empty;
+    public Guid  Id { get; set; }
     
     /// <summary>
-    /// Пароль
+    /// Логин
     /// </summary>
-    public string Password { get; set; } = string.Empty;
+    public string Login { get; set; } = string.Empty;
     
     /// <summary>
-    /// Имя пользователя
+    /// Имя
     /// </summary>
     public string Name { get; set; } = string.Empty;
+    
+    /// <summary>
+    /// Хеш пароля
+    /// </summary>
+    public string PasswordHash { get; set; } = string.Empty;
     
     /// <summary>
     /// Идентификатор роли
