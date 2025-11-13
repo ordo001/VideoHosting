@@ -7,5 +7,5 @@ namespace VideoHostingApi.Auth.Services.Contracts;
 /// </summary>
 public interface IAuthService
 {
-    public Task<string> LoginAsync(LoginModel loginModel, CancellationToken cancellationToken);
+    public Task<Token> LoginAsync(LoginModel loginModel, CancellationToken cancellationToken);
 }

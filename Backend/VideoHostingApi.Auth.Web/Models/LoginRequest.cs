@@ -1,4 +1,4 @@
-namespace VideoHostingApi.Auth.Services.Contracts.Models;
+namespace VideoHostingApi.Auth.Web.Models;
 
 /// <summary>
 /// Модель запроса на вход

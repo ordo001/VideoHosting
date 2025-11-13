@@ -1,14 +1,14 @@
 using VideoHostingApi.Auth.Entities;
 
-namespace VideoHostingApi.Auth.Services.Contracts.Models;
+namespace VideoHosting.Auth.Repositories.Contracts.Models;
 
 /// <summary>
-/// Модель пользователя
+/// Модель пользователя из базы данных
 /// </summary>
-public class UserModel
+public class UserDbModel
 {
     /// <summary>
-    /// Идентификатор пользователя
+    /// Идентфикатор
     /// </summary>
     public Guid Id { get; set; }
     
@@ -18,14 +18,14 @@ public class UserModel
     public string Login { get; set; } = string.Empty;
     
     /// <summary>
+    /// Хэш пароля
+    /// </summary>
+    public string PasswordHash { get; set; } = string.Empty;
+    
+    /// <summary>
     /// Имя
     /// </summary>
     public string Name { get; set; } = string.Empty;
-    
-    /// <summary>
-    /// Хеш пароля
-    /// </summary>
-    public string PasswordHash { get; set; } = string.Empty;
     
     /// <summary>
     /// Роль

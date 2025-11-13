@@ -18,7 +18,7 @@ public static class DependencyInjection
     /// </summary>
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddSingleton<TokenGeneratorOptions>();
+        //services.AddSingleton<TokenGeneratorOptions>();
         services.AddSingleton<Profile, AuthWebMapperProfile>();
         services.AddSingleton<Profile, AuthServicesMapperProfile>();
         

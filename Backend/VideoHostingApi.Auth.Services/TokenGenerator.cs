@@ -15,19 +15,13 @@ namespace VideoHostingApi.Auth.Services;
 public class TokenGenerator(TokenGeneratorOptions options,
     IUserRepository userRepository) : ITokenGenerator, IAuthServiceAnchor
 {
-    public async Task<Token> GenerateToken(LoginModel loginModel, CancellationToken cancellationToken)
+    public Token GenerateToken(GenerateTokenModel generateTokenModel)
     {
-        var user = await userRepository.GetByLogin(loginModel.Login, cancellationToken);
-        if (user is null)
-        {
-            throw new EntityNotFoundException($"Пользователь с логином {loginModel.Login} не найден");
-        }
-            
         var claims = new List<Claim>
         {
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new("Login", user.Login),
-            new(ClaimTypes.Role, user.Role.Name),
+            new(ClaimTypes.NameIdentifier, generateTokenModel.Id.ToString()),
+            new("Login", generateTokenModel.Login),
+            new(ClaimTypes.Role, generateTokenModel.RoleName),
         };
 
         var jwt = new JwtSecurityToken(

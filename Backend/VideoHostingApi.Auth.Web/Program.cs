@@ -20,6 +20,7 @@ public class Program
 
         builder.Services.AddServices();
         builder.Services.RegisterAutoMapper();
+        builder.Services.ConfigureAuth(builder.Configuration);
         
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();

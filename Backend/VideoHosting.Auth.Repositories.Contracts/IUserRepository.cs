@@ -1,3 +1,4 @@
+using VideoHosting.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Common.Repositories;
 using VideoHostingApi.Auth.Entities;
 using VideoHostingApi.Common.Repositories.Contracts;
@@ -12,5 +13,5 @@ public interface IUserRepository : IRepository<User>
     /// <summary>
     /// Получить пользователя по логину
     /// </summary>
-    public Task<User?> GetByLogin(string login, CancellationToken cancellationToken);
+    public Task<Models.UserDbModel?> GetByLogin(string login, CancellationToken cancellationToken);
 }

@@ -17,5 +17,6 @@ public class AuthServicesMapperProfile : Profile
     {
         CreateMap<User,UserModel>(MemberList.Destination).ReverseMap();
         CreateMap<AddUserModel,User>(MemberList.Destination).ReverseMap();
+        CreateMap<GenerateTokenModel,User>(MemberList.Destination).ReverseMap();
     }
 }

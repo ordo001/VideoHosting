@@ -1,19 +1,19 @@
 using VideoHostingApi.Auth.Entities;
 
-namespace VideoHostingApi.Auth.Services.Contracts.Models;
+namespace VideoHostingApi.Auth.Web.Models;
 
 /// <summary>
-/// Модель пользователя
+/// Модель пользователя для ответа
 /// </summary>
-public class UserModel
+public class UserResponse
 {
     /// <summary>
-    /// Идентификатор пользователя
+    /// Идентификатор
     /// </summary>
     public Guid Id { get; set; }
     
     /// <summary>
-    /// Логин
+    /// Имя
     /// </summary>
     public string Login { get; set; } = string.Empty;
     
@@ -21,14 +21,9 @@ public class UserModel
     /// Имя
     /// </summary>
     public string Name { get; set; } = string.Empty;
-    
-    /// <summary>
-    /// Хеш пароля
-    /// </summary>
-    public string PasswordHash { get; set; } = string.Empty;
-    
+
     /// <summary>
     /// Роль
     /// </summary>
-    public Role? Role { get; set; }
+    public Role? Role { get; set; } 
 }

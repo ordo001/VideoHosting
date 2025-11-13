@@ -12,5 +12,9 @@ public class AuthWebMapperProfile : Profile
     public AuthWebMapperProfile()
     {
         CreateMap<AddUserRequest, AddUserModel>().ReverseMap();
+        CreateMap<UserResponse, UserModel>(MemberList.Destination).ReverseMap();
+        CreateMap<UpdateUserRequest, UpdateUserModel>(MemberList.Destination).ReverseMap();
+
+        CreateMap<LoginRequest, LoginModel>(MemberList.Destination).ReverseMap();
     }
 }

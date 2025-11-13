@@ -1,5 +1,6 @@
 using AutoMapper;
 using VideoHosting.Auth.Repositories.Contracts;
+using VideoHosting.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Auth.Entities;
 using VideoHostingApi.Auth.Services.Contracts;
 using VideoHostingApi.Auth.Services.Contracts.Exceptions;
@@ -80,7 +81,7 @@ public class UserService(IUserRepository userRepository,
         return user;
     }
     
-    private async Task<User> CheckLoginOrThrowException(string login, CancellationToken cancellationToken)
+    private async Task<UserDbModel> CheckLoginOrThrowException(string login, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByLogin(login, cancellationToken);
         if (user is null)
