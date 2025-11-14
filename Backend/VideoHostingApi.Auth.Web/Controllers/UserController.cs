@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VideoHosting.Auth.Repositories.Contracts;
 using VideoHostingApi.Auth.Context;
@@ -15,6 +16,7 @@ namespace VideoHostingApi.Auth.Web.Controllers;
 /// </summary>
 [Route("[controller]")]
 [ApiController]
+[Authorize(Roles = "admin, moder")]
 public class UserController(IUserServices userServices, IMapper mapper) : ControllerBase
 {
     

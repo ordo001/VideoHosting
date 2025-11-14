@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace VideoHostingApi.Common.Web;
 
-public static class ServiceCollectionExtensions
+public static class ConfigureExtensions
 {
     /// <summary>
     /// Регистрирует все интерфейсы инстансов в указанной сборке для указанного маркерного интерфейса
