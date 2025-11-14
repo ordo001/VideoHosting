@@ -50,29 +50,36 @@ public class UserService(IUserRepository userRepository,
 
     public async Task Remove(Guid id, CancellationToken cancellationToken)
     {
-        var user = await CheckIdOrThrowException(id, cancellationToken); 
+        var model = await CheckIdOrThrowException(id, cancellationToken);
+        var user = mapper.Map<User>(model);
         userRepository.Delete(user, cancellationToken);
         await userRepository.SaveChanges(cancellationToken);
     }
 
     public async Task Update(UpdateUserModel model, CancellationToken cancellationToken)
     {
-        var user = await CheckIdOrThrowException(model.Id, cancellationToken);
-        await CheckLoginOrThrowException(model.Login, cancellationToken);
-        await CheckRoleIdOrThrowException(model.RoleId, cancellationToken);
+        var result = await userRepository.GetByLogin(model.Login, cancellationToken);
+        if (result is not null)
+        {
+            throw new EntityIsExistException($"Пользователь с логином {model.Login} существует");
+        }
+        var userModel = await CheckIdOrThrowException(model.Id, cancellationToken);
+        await CheckLoginOrThrowException(userModel.Login, cancellationToken);
+        await CheckRoleIdOrThrowException(userModel.Role!.Id, cancellationToken);
 
-        user.Login = model.Login;
-        user.Name = model.Name;
-        user.PasswordHash = passwordHasher.GeneratePasswordHash(model.PasswordHash);
-        user.RoleId = model.RoleId;
+        userModel.Login = model.Login;
+        userModel.Name = model.Name;
+        userModel.PasswordHash = passwordHasher.GeneratePasswordHash(model.PasswordHash);
+        userModel.Role.Id = model.RoleId;
         
+        var user = mapper.Map<User>(userModel);
         userRepository.Update(user);
         await userRepository.SaveChanges(cancellationToken);
     }
 
-    private async Task<User> CheckIdOrThrowException(Guid id, CancellationToken cancellationToken)
+    private async Task<UserDbModel> CheckIdOrThrowException(Guid id, CancellationToken cancellationToken)
     {
-        var user = await userRepository.Get(id, cancellationToken);
+        var user = await userRepository.GetById(id, cancellationToken);
         if (user is null)
         {
             throw new EntityNotFoundException($"Пользователь с идентификатором {id} не найден");
@@ -92,13 +99,12 @@ public class UserService(IUserRepository userRepository,
         return user;
     }
     
-    private async Task<Role> CheckRoleIdOrThrowException(Guid id, CancellationToken cancellationToken)
+    private async Task CheckRoleIdOrThrowException(Guid id, CancellationToken cancellationToken)
     {
-        var role = await roleRepository.Get(id, cancellationToken);
+        var role = await roleRepository.GetById(id, cancellationToken);
         if (role is null)
         {
             throw new EntityNotFoundException($"Роль с идентификатором {id} не найдена");
         }
-        return role;
     }
 }

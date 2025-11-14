@@ -10,10 +10,10 @@ namespace VideoHostingApi.Auth.Repositories;
 /// <summary>
 /// EF Core репозиторий для работы с пользователями
 /// </summary>
-public class UserRepository(AuthContext context) : RepositoryBase<User>(context),
+public class UserRepository(AuthContext context) : WriteRepositoryBase<User>(context),
     IUserRepository, IAuthRepositoryAnchor
 {
-    public async Task<VideoHosting.Auth.Repositories.Contracts.Models.UserDbModel?> GetByLogin(string login, CancellationToken cancellationToken)
+    public async Task<UserDbModel?> GetByLogin(string login, CancellationToken cancellationToken)
     {
         return await context
             .Set<User>()
@@ -26,5 +26,29 @@ public class UserRepository(AuthContext context) : RepositoryBase<User>(context)
                 Role = u.Role
             })
             .FirstOrDefaultAsync(x => x.Login == login, cancellationToken);
+    }
+
+    public async Task<UserDbModel?> GetById(Guid userId, CancellationToken cancellationToken)
+    {
+        return await context.Set<User>().Select(u => new UserDbModel
+        {
+            Id = u.Id,
+            Login = u.Login,
+            PasswordHash = u.PasswordHash,
+            Name = u.Name,
+            Role = u.Role
+        }).SingleOrDefaultAsync(x => x.Id == userId, cancellationToken);
+    }
+
+    public async Task<IEnumerable<UserDbModel>> GetAll(CancellationToken cancellationToken)
+    {
+        return await context.Set<User>().Select(u => new UserDbModel
+        {
+            Id = u.Id,
+            Login = u.Login,
+            PasswordHash = u.PasswordHash,
+            Name = u.Name,
+            Role = u.Role
+        }).ToListAsync(cancellationToken);
     }
 }

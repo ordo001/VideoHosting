@@ -8,10 +8,20 @@ namespace VideoHosting.Auth.Repositories.Contracts;
 /// <summary>
 /// Репозиторий для работы с <see cref="User"/>
 /// </summary>
-public interface IUserRepository : IRepository<User>
+public interface IUserRepository : IWriteRepository<User>
 {
     /// <summary>
     /// Получить пользователя по логину
     /// </summary>
-    public Task<Models.UserDbModel?> GetByLogin(string login, CancellationToken cancellationToken);
+    public Task<UserDbModel?> GetByLogin(string login, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Получить пользователя по идентификатору
+    /// </summary>
+    public Task<UserDbModel?> GetById(Guid userId, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Получить всех пользователей
+    /// </summary>
+    public Task<IEnumerable<UserDbModel>> GetAll(CancellationToken cancellationToken);
 }
