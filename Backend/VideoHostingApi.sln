@@ -42,10 +42,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Repositories", "VideoHostingApi.FileService.Repositories\VideoHostingApi.FileService.Repositories.csproj", "{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VideoHostingApi.Gateway", "VideoHostingApi.Gateway", "{1692D001-DC63-421B-BEE4-85BD05BB268D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Gateway.Web", "VideoHostingApi.Gateway.Web\VideoHostingApi.Gateway.Web.csproj", "{2A3AEE56-4E30-43FE-97A1-C77486B73834}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Entities.Configuration", "VideoHostingApi.FileService.Entities.Configuration\VideoHostingApi.FileService.Entities.Configuration.csproj", "{4149CF5F-CB3F-49DD-B824-C1AE73710708}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService.Context", "VideoHostingApi.FileService.Context\VideoHostingApi.FileService.Context.csproj", "{3F0EE1B9-5053-4B8B-8871-98FC9E5D6D0E}"
@@ -53,6 +49,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Auth.Services.Contracts", "VideoHostingApi.Auth.Services.Contracts\VideoHostingApi.Auth.Services.Contracts.csproj", "{D9CAD4EA-D24D-4527-8E51-075F18256040}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Auth.Services", "VideoHostingApi.Auth.Services\VideoHostingApi.Auth.Services.csproj", "{55FC140A-51CE-4981-BECA-681F0418A003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Web", "VideoHostingApi.Web\VideoHostingApi.Web.csproj", "{43D794E3-E911-4378-A7AB-4CCA332F8928}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -132,10 +130,6 @@ Global
 		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A3AEE56-4E30-43FE-97A1-C77486B73834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A3AEE56-4E30-43FE-97A1-C77486B73834}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A3AEE56-4E30-43FE-97A1-C77486B73834}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A3AEE56-4E30-43FE-97A1-C77486B73834}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4149CF5F-CB3F-49DD-B824-C1AE73710708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4149CF5F-CB3F-49DD-B824-C1AE73710708}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4149CF5F-CB3F-49DD-B824-C1AE73710708}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -152,6 +146,10 @@ Global
 		{55FC140A-51CE-4981-BECA-681F0418A003}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55FC140A-51CE-4981-BECA-681F0418A003}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55FC140A-51CE-4981-BECA-681F0418A003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43D794E3-E911-4378-A7AB-4CCA332F8928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D794E3-E911-4378-A7AB-4CCA332F8928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D794E3-E911-4378-A7AB-4CCA332F8928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D794E3-E911-4378-A7AB-4CCA332F8928}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B76315FB-2EEB-4BB9-A8ED-984765634884} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}
@@ -172,7 +170,6 @@ Global
 		{16EFC04E-2CF7-4544-BC7A-B97CD854292F} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
 		{BEBA1A71-F0A8-4140-9D4A-0CDBDAC8709F} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
 		{F93E32A2-BD0C-4E18-8A1D-D10A446791BF} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
-		{2A3AEE56-4E30-43FE-97A1-C77486B73834} = {1692D001-DC63-421B-BEE4-85BD05BB268D}
 		{4149CF5F-CB3F-49DD-B824-C1AE73710708} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
 		{3F0EE1B9-5053-4B8B-8871-98FC9E5D6D0E} = {1F8FDD8E-4F4A-4C77-B690-EDE69A3A388C}
 		{D9CAD4EA-D24D-4527-8E51-075F18256040} = {0CA803D8-A914-4FE8-9B80-F31218F803A0}

@@ -1,8 +1,9 @@
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using VideoHosting.Auth.Repositories.Contracts;
 using VideoHostingApi.Auth.Repositories;
 using VideoHostingApi.Auth.Services;
 using VideoHostingApi.Auth.Services.Contracts;
@@ -16,9 +17,8 @@ public static class DependencyInjection
     /// <summary>
     /// Конфигурация зависимостей
     /// </summary>
-    public static IServiceCollection AddServices(this IServiceCollection services)
+    public static IServiceCollection ConfigureAuthService(this IServiceCollection services)
     {
-        //services.AddSingleton<TokenGeneratorOptions>();
         services.AddSingleton<Profile, AuthWebMapperProfile>();
         services.AddSingleton<Profile, AuthServicesMapperProfile>();
         
@@ -26,26 +26,6 @@ public static class DependencyInjection
         services.RegisterAssemblyInterfacesAssignableTo<IAuthServiceAnchor>(ServiceLifetime.Scoped);
         
         return services;    
-    }
-
-    public static IServiceCollection RegisterAutoMapper(this IServiceCollection services)
-    {
-        services.AddSingleton<IMapper>(provider =>
-        {
-            var profiles = provider.GetServices<Profile>().ToList();
-        
-            var config = new MapperConfiguration(cfg =>
-            {
-                foreach (var profile in profiles)
-                {
-                    cfg.AddProfile(profile);
-                }
-            });
-
-            return config.CreateMapper();
-        });
-        
-        return services;
     }
     
     /// <summary>

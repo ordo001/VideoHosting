@@ -1,12 +1,13 @@
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using VideoHostingApi.Auth.Context;
 using VideoHostingApi.Auth.Web.Extensions;
-using VideoHostingApi.Auth.Web.Middlewares;
+using VideoHostingApi.FileService.Web.Extentions;
+using VideoHostingApi.Web.Middlewares;
+using Microsoft.EntityFrameworkCore;
 
-namespace VideoHostingApi.Auth.Web;
+
+namespace VideoHostingApi.Web;
 
 public class Program
 {
@@ -15,11 +16,10 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
 
-        builder.Services.AddDbContext<AuthContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDbConnection")));
-
-        builder.Services.AddServices();
-        builder.Services.RegisterAutoMapper();
+        builder.Services.AddDbContext<>()
+        
+        builder.Services.ConfigureFileService(builder.Configuration);
+        builder.Services.ConfigureAuthService();
         builder.Services.ConfigureAuth(builder.Configuration);
         
         builder.Services.AddControllers();
@@ -61,19 +61,10 @@ public class Program
             }
         });
 
-        //builder.WebHost.UseUrls("http://0.0.0.0:8080");
-
-
         var app = builder.Build();
 
-        using (var scope = app.Services.CreateScope())
-        {
-            var db = scope.ServiceProvider.GetRequiredService<AuthContext>();
-            db.Database.Migrate();
-        }
-
         app.UseMiddleware<ExceptionMiddleware>();
-
+        
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
