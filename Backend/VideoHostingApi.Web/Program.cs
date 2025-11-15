@@ -6,6 +6,8 @@ using VideoHostingApi.FileService.Web.Extentions;
 using VideoHostingApi.Web.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using VideoHostingApi.Auth.Context;
+using VideoHostingApi.FileService.Context;
+using VideoHostingApi.Web.Extentions;
 
 
 namespace VideoHostingApi.Web;
@@ -16,11 +18,15 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var authConnectionString = builder.Configuration.GetConnectionString("AuthDbConnection");
+        var fileConnectionString = builder.Configuration.GetConnectionString("FileDbConnection");
 
-        builder.Services.AddDbContext<AuthContext>();
+        builder.Services.AddDbContext<AuthContext>(x => x.UseNpgsql(authConnectionString));
+        builder.Services.AddDbContext<FileServiceContext>(x => x.UseNpgsql(fileConnectionString));
         
         builder.Services.ConfigureFileService(builder.Configuration);
         builder.Services.ConfigureAuthService();
+        builder.Services.RegisterAutoMapper();
         builder.Services.ConfigureAuth(builder.Configuration);
         
         builder.Services.AddControllers();
