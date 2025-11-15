@@ -5,6 +5,7 @@ using VideoHostingApi.Auth.Web.Extensions;
 using VideoHostingApi.FileService.Web.Extentions;
 using VideoHostingApi.Web.Middlewares;
 using Microsoft.EntityFrameworkCore;
+using VideoHostingApi.Auth.Context;
 
 
 namespace VideoHostingApi.Web;
@@ -16,7 +17,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
 
-        builder.Services.AddDbContext<>()
+        builder.Services.AddDbContext<AuthContext>();
         
         builder.Services.ConfigureFileService(builder.Configuration);
         builder.Services.ConfigureAuthService();
