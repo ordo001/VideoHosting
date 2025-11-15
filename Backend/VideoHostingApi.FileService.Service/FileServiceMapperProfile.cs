@@ -1,6 +1,7 @@
 using AutoMapper;
 using VideoHostingApi.FileService.Entities;
 using VideoHostingApi.FileService.Repositories.Contracts.Models;
+using VideoHostingApi.FileService.Service.Contracts.Models;
 
 namespace VideoHostingApi.FileService.Service;
 
@@ -11,7 +12,7 @@ public class FileServiceMapperProfile : Profile
 {
     public FileServiceMapperProfile()
     {
-        CreateMap<Video, FileDbModel>().ReverseMap();
-        CreateMap<Image, FileDbModel>().ReverseMap();
+        CreateMap<Video, FileMetadata>(MemberList.Destination).ReverseMap();
+        CreateMap<Image, FileMetadata>(MemberList.Destination).ReverseMap();
     }
 }

@@ -35,7 +35,7 @@ public class ImageService(IObjectStorageRepository<Image> imageObjectStorageRepo
     public async Task UploadFile(AddFileModel fileModel, CancellationToken cancellationToken)
     {
         await imageObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
-        await imageObjectStorageRepository.UploadFile(fileModel.FileName, fileModel.FileStream, fileModel.ContentType, cancellationToken);
+        await imageObjectStorageRepository.UploadFile(fileModel.Name, fileModel.FileStream, fileModel.ContentType, cancellationToken);
     }
 
     public async Task<FileModel> DownloadFile(string name, CancellationToken cancellationToken)
@@ -58,6 +58,16 @@ public class ImageService(IObjectStorageRepository<Image> imageObjectStorageRepo
     }
 
     public Task DeleteFile(string name, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FileMetadata?> GetMetadata(string fileName, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<FileMetadata>> GetAllMetadata(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

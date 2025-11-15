@@ -6,7 +6,7 @@ namespace VideoHostingApi.FileService.Service.Contracts.Models;
 public class FileModel
 {
     /// <summary>
-    /// Потом файла
+    /// Поток файла
     /// </summary>
     public Stream FileStream { get; set; } = null!;
     

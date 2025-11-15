@@ -6,11 +6,6 @@ namespace VideoHostingApi.FileService.Service.Contracts.Models;
 public class FileMetadata
 {
     /// <summary>
-    /// Потом файла
-    /// </summary>
-    public Stream FileStream { get; set; } = null!;
-    
-    /// <summary>
     /// Mime type
     /// </summary>
     public string ContentType { get; set; } = string.Empty;
@@ -18,7 +13,12 @@ public class FileMetadata
     /// <summary>
     /// Имя файла
     /// </summary>
-    public string FileName { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    
+    /// <summary>
+    /// Размер файла
+    /// </summary>
+    public long Size { get; set; }
     
     /// <summary>
     /// Идентификатор пользователя

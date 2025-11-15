@@ -37,4 +37,14 @@ public interface IFileService
     /// Удалить видео из хранилища
     /// </summary>
     public Task DeleteFile(string name, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Получить метаданные файла
+    /// </summary>
+    public Task<FileMetadata> GetMetadata(string fileName, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Получить все метаданные
+    /// </summary>
+    public Task<IEnumerable<FileMetadata>> GetAllMetadata(CancellationToken cancellationToken);
 }

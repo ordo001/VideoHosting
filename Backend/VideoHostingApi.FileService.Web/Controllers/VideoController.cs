@@ -45,15 +45,15 @@ public class VideoController(IVideoService fileService, IMapper mapper) : Contro
     [HttpGet("metadata")]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
-        //var result = await fileService.GetListObjects(cancellationToken);
-        return Ok();
+        var result = await fileService.GetAllMetadata(cancellationToken);
+        return Ok(result);
     }
     
     [HttpGet("{fileName}/metadata")]
     public async Task<IActionResult> GetMetadataByName(string fileName, CancellationToken cancellationToken)
     {
-        //var result = await fileService.GetListObjects(cancellationToken);
-        return Ok();
+        var result = await fileService.GetMetadata(fileName, cancellationToken);
+        return Ok(result);
     }
     
     [HttpDelete]

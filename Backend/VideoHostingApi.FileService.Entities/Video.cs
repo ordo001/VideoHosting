@@ -18,6 +18,11 @@ public class Video : EntityBase
     public string ContentType { get; set; } = string.Empty;
     
     /// <summary>
+    /// Размер видео
+    /// </summary>
+    public long Size { get; set; }
+    
+    /// <summary>
     /// Идентификатор пользователя
     /// </summary>
     public Guid UserId { get; set; }

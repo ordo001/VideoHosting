@@ -18,7 +18,12 @@ public class AddFileModel
     /// <summary>
     /// Имя файла
     /// </summary>
-    public string FileName { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    
+    /// <summary>
+    /// Размер файла
+    /// </summary>
+    public long Size { get; set; }
     
     /// <summary>
     /// Идентификатор пользователя

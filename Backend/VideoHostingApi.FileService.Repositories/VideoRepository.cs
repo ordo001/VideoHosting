@@ -17,4 +17,9 @@ public class VideoRepository(FileServiceContext context) : WriteRepositoryBase<V
     {
         return await context.Set<Video>().FirstOrDefaultAsync(x => x.Name == name, cancellationToken);
     }
+
+    public async Task<IEnumerable<Video>> GetAll(CancellationToken cancellationToken)
+    {
+        return await context.Set<Video>().ToListAsync(cancellationToken);
+    }
 }

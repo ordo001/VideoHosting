@@ -21,6 +21,11 @@ public class FileDbModel
     public string FileName { get; set; } = string.Empty;
     
     /// <summary>
+    /// Размер файла
+    /// </summary>
+    public long Size { get; set; }
+    
+    /// <summary>
     /// Идентификатор пользователя
     /// </summary>
     public Guid UserId { get; set; }

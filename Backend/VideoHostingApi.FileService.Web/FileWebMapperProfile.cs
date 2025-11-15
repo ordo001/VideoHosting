@@ -13,7 +13,7 @@ public class FileWebMapperProfile : Profile
         CreateMap<IFormFile, AddFileModel>()
             .ForMember(x => x.FileStream, opt =>
                 opt.MapFrom(x => x.OpenReadStream()))
-            .ForMember(x => x.FileName, opt =>
+            .ForMember(x => x.Name, opt =>
                 opt.MapFrom(x => x.FileName))
             .ForMember(x => x.ContentType, opt =>
                 opt.MapFrom(x => x.ContentType));
