@@ -37,7 +37,7 @@ public class UserService(IUserRepository userRepository,
         var result = await userRepository.GetByLogin(model.Login, cancellationToken);
         if (result is not null)
         {
-            throw new EntityIsExistException($"Пользователь с логином {model.Login} существует");
+            throw new AuthEntityIsExistException($"Пользователь с логином {model.Login} существует");
         }
         await CheckRoleIdOrThrowException(model.RoleId, cancellationToken);
         
@@ -61,7 +61,7 @@ public class UserService(IUserRepository userRepository,
         var result = await userRepository.GetByLogin(model.Login, cancellationToken);
         if (result is not null)
         {
-            throw new EntityIsExistException($"Пользователь с логином {model.Login} существует");
+            throw new AuthEntityIsExistException($"Пользователь с логином {model.Login} существует");
         }
         var userModel = await CheckIdOrThrowException(model.Id, cancellationToken);
         await CheckLoginOrThrowException(userModel.Login, cancellationToken);
@@ -82,7 +82,7 @@ public class UserService(IUserRepository userRepository,
         var user = await userRepository.GetById(id, cancellationToken);
         if (user is null)
         {
-            throw new EntityNotFoundException($"Пользователь с идентификатором {id} не найден");
+            throw new AuthEntityNotFoundException($"Пользователь с идентификатором {id} не найден");
         }
         
         return user;
@@ -93,7 +93,7 @@ public class UserService(IUserRepository userRepository,
         var user = await userRepository.GetByLogin(login, cancellationToken);
         if (user is null)
         {
-            throw new EntityNotFoundException($"Пользователь с логином {login} не найден");
+            throw new AuthEntityNotFoundException($"Пользователь с логином {login} не найден");
         }
         
         return user;
@@ -104,7 +104,7 @@ public class UserService(IUserRepository userRepository,
         var role = await roleRepository.GetById(id, cancellationToken);
         if (role is null)
         {
-            throw new EntityNotFoundException($"Роль с идентификатором {id} не найдена");
+            throw new AuthEntityNotFoundException($"Роль с идентификатором {id} не найдена");
         }
     }
 }

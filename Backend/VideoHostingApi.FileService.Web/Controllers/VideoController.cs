@@ -1,48 +1,59 @@
+using System.Security.Claims;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VideoHostingApi.FileService.Service.Contracts;
+using VideoHostingApi.FileService.Service.Contracts.Models;
 
 namespace VideoHostingApi.FileService.Web.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public class VideoController(IVideoService fileService) : ControllerBase
+public class VideoController(IVideoService fileService, IMapper mapper) : ControllerBase
 {
 
-    [HttpPost("Upload")]
+    [HttpPost("upload")]
     public async Task<IActionResult> UploadFile(IFormFile file, CancellationToken cancellationToken)
     {
-        var stream = file.OpenReadStream();
-        await fileService.UploadFile(file.FileName, stream, file.ContentType, cancellationToken);
+        var model = mapper.Map<AddFileModel>(file);
+        model.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+        await fileService.UploadFile(model, cancellationToken);
         return Ok();
     }
     
-    [HttpGet("Download")]
+    [HttpGet("download")]
     public async Task<IActionResult> DownloadFile(string name, CancellationToken cancellationToken)
     {
         var result = await fileService.DownloadFile(name, cancellationToken);
         return File(result.FileStream, result.ContentType, name);
     }
 
-    [HttpGet("GetUploadUrl")]
+    [HttpGet("upload-url")]
     public async Task<IActionResult> GetUploadUrl(string fileName, CancellationToken cancellationToken)
     {
         var url = await fileService.GetPresignedUploadUrl(fileName, cancellationToken);
         return Ok(url);
     }
     
-    [HttpGet("GetDownloadUrl")]
+    [HttpGet("download-url")]
     public async Task<IActionResult> GetDownloadUrl(string fileName, CancellationToken cancellationToken)
     {
         var url = await fileService.GetPresignedDownloadUrl(fileName, cancellationToken);
         return Ok(url);
     }
     
-    [HttpGet("All")]
-    public async Task<IActionResult> GetAll( CancellationToken cancellationToken)
+    [HttpGet("metadata")]
+    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
-        var result = await fileService.GetListObjects(cancellationToken);
-        return Ok(result);
+        //var result = await fileService.GetListObjects(cancellationToken);
+        return Ok();
+    }
+    
+    [HttpGet("{fileName}/metadata")]
+    public async Task<IActionResult> GetMetadataByName(string fileName, CancellationToken cancellationToken)
+    {
+        //var result = await fileService.GetListObjects(cancellationToken);
+        return Ok();
     }
     
     [HttpDelete]

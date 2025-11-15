@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Minio;
+using VideoHostingApi.Common.Web;
 using VideoHostingApi.FileService.Entities;
 using VideoHostingApi.FileService.Repositories;
 using VideoHostingApi.FileService.Repositories.Contracts;
@@ -17,6 +18,7 @@ public static class FileServiceConfigure
 {
     public static IServiceCollection ConfigureFileService(this IServiceCollection services, IConfigurationManager configuration)
     {
+        services.RegisterAssemblyInterfacesAssignableTo<IFileRepositoryAnchor>(ServiceLifetime.Scoped);
         services.AddScoped<IVideoService, VideoService>();
 
         var minioClient = new MinioClient()

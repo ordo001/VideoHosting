@@ -32,10 +32,10 @@ public class ImageService(IObjectStorageRepository<Image> imageObjectStorageRepo
         }
     }
 
-    public async Task UploadFile(string name, Stream stream, string contentType, CancellationToken cancellationToken)
+    public async Task UploadFile(AddFileModel fileModel, CancellationToken cancellationToken)
     {
         await imageObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
-        await imageObjectStorageRepository.UploadFile(name, stream, contentType, cancellationToken);
+        await imageObjectStorageRepository.UploadFile(fileModel.FileName, fileModel.FileStream, fileModel.ContentType, cancellationToken);
     }
 
     public async Task<FileModel> DownloadFile(string name, CancellationToken cancellationToken)

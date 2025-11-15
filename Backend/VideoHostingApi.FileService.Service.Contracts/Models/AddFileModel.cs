@@ -1,9 +1,9 @@
-namespace VideoHostingApi.FileService.Repositories.Contracts.Models;
+namespace VideoHostingApi.FileService.Service.Contracts.Models;
 
 /// <summary>
-/// Модель файла из S3 хранилища
+/// Модель файла на добавление
 /// </summary>
-public class FileDbModel
+public class AddFileModel
 {
     /// <summary>
     /// Потом файла
@@ -24,9 +24,4 @@ public class FileDbModel
     /// Идентификатор пользователя
     /// </summary>
     public Guid UserId { get; set; }
-    
-    /// <summary>
-    /// Дата загрузки
-    /// </summary>
-    public DateTime UploadedAt { get; set; }
 }

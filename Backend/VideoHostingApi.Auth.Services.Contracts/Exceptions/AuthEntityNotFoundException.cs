@@ -5,4 +5,4 @@ namespace VideoHostingApi.Auth.Services.Contracts.Exceptions;
 /// <summary>
 /// Сущность не найдена
 /// </summary>
-public class EntityNotFoundException(string message) : ExceptionBase(message);
+public class AuthEntityNotFoundException(string message) : ExceptionBase(message);

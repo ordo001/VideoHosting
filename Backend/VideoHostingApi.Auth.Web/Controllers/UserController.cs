@@ -1,10 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VideoHosting.Auth.Repositories.Contracts;
-using VideoHostingApi.Auth.Context;
-using VideoHostingApi.Auth.Entities;
-using VideoHostingApi.Auth.Repositories;
 using VideoHostingApi.Auth.Services.Contracts;
 using VideoHostingApi.Auth.Services.Contracts.Models;
 using VideoHostingApi.Auth.Web.Models;

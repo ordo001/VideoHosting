@@ -21,7 +21,7 @@ public interface IFileService
     /// <summary>
     /// Загрузить видео в хранилище
     /// </summary>
-    public Task UploadFile(string name, Stream stream, string contentType, CancellationToken cancellationToken);
+    public Task UploadFile(AddFileModel fileModel, CancellationToken cancellationToken);
     
     /// <summary>
     /// Получить ссылку на скачивание видео

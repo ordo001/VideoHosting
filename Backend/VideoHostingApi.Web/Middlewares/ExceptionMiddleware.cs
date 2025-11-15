@@ -1,7 +1,8 @@
 using System.Text.Json;
-using Minio.Exceptions;
 using VideoHostingApi.Auth.Services.Contracts.Exceptions;
+using VideoHostingApi.FileService.Service.Exceptions;
 using ErrorResponse = VideoHostingApi.Common.Web.Models.ErrorResponse;
+using ObjectNotFoundException = VideoHostingApi.FileService.Service.Exceptions.ObjectNotFoundException;
 
 namespace VideoHostingApi.Web.Middlewares;
 
@@ -23,21 +24,25 @@ public class ExceptionMiddleware(RequestDelegate next)
 
             switch (ex)
             {
-                case BucketNotFoundException bucketNotFoundException:
+                case ObjectNotFoundException bucketNotFoundException:
                     response.StatusCode = StatusCodes.Status404NotFound;
                     error.Message = bucketNotFoundException.Message;
                     break;
                 
-                case EntityNotFoundException entityNotFoundException: 
+                case FileEntityNotFoundException fileNotFoundException:
+                    response.StatusCode = StatusCodes.Status404NotFound;
+                    error.Message = fileNotFoundException.Message;
+                    break;
+                
+                case AuthEntityNotFoundException entityNotFoundException: 
                     response.StatusCode = StatusCodes.Status404NotFound;
                     error.Message = entityNotFoundException.Message;
                     break;
                 
-                case EntityIsExistException entityIsExistException: 
+                case AuthEntityIsExistException entityIsExistException: 
                     response.StatusCode = StatusCodes.Status400BadRequest;
                     error.Message = entityIsExistException.Message;
                     break;
-                
 
                 default:
                     response.StatusCode = StatusCodes.Status500InternalServerError;
