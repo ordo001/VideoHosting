@@ -1,9 +1,9 @@
-using VideoHosting.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Common.Repositories;
 using VideoHostingApi.Auth.Entities;
+using VideoHostingApi.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Common.Repositories.Contracts;
 
-namespace VideoHosting.Auth.Repositories.Contracts;
+namespace VideoHostingApi.Auth.Repositories.Contracts;
 
 /// <summary>
 /// Репозиторий для работы с <see cref="User"/>

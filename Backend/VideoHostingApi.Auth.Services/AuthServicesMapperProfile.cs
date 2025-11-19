@@ -1,6 +1,6 @@
 
 using AutoMapper;
-using VideoHosting.Auth.Repositories.Contracts.Models;
+using VideoHostingApi.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Auth.Entities;
 using VideoHostingApi.Auth.Services.Contracts.Models;
 

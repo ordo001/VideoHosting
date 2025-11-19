@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using VideoHosting.Auth.Repositories.Contracts;
-using VideoHosting.Auth.Repositories.Contracts.Models;
+using VideoHostingApi.Auth.Repositories.Contracts;
+using VideoHostingApi.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Auth.Context;
 using VideoHostingApi.Auth.Entities;
 using VideoHostingApi.Common.Repositories;

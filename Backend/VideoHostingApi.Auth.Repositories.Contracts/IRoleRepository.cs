@@ -1,8 +1,8 @@
-using VideoHosting.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Auth.Entities;
+using VideoHostingApi.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Common.Repositories.Contracts;
 
-namespace VideoHosting.Auth.Repositories.Contracts;
+namespace VideoHostingApi.Auth.Repositories.Contracts;
 
 /// <summary>
 /// Интерфейс для работы с ролями

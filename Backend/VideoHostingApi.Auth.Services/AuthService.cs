@@ -1,5 +1,5 @@
 using AutoMapper;
-using VideoHosting.Auth.Repositories.Contracts;
+using VideoHostingApi.Auth.Repositories.Contracts;
 using VideoHostingApi.Auth.Services.Contracts;
 using VideoHostingApi.Auth.Services.Contracts.Exceptions;
 using VideoHostingApi.Auth.Services.Contracts.Models;

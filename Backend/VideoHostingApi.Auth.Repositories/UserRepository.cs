@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VideoHosting.Auth.Repositories.Contracts;
-using VideoHosting.Auth.Repositories.Contracts.Models;
+using VideoHostingApi.Auth.Repositories.Contracts;
+using VideoHostingApi.Auth.Repositories.Contracts.Models;
 using VideoHostingApi.Common.Repositories;
 using VideoHostingApi.Auth.Context;
 using VideoHostingApi.Auth.Entities;
@@ -17,7 +17,7 @@ public class UserRepository(AuthContext context) : WriteRepositoryBase<User>(con
     {
         return await context
             .Set<User>()
-            .Select(u => new VideoHosting.Auth.Repositories.Contracts.Models.UserDbModel
+            .Select(u => new Contracts.Models.UserDbModel
             {
                 Id = u.Id,
                 Login = u.Login,

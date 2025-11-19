@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.FileService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Entities.Configuration", "VideoHostingApi.Common.Entities.Configuration\VideoHostingApi.Common.Entities.Configuration.csproj", "{B26F2DEA-C449-4D66-937A-3FEB9856652C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHosting.Auth.Repositories.Contracts", "VideoHosting.Auth.Repositories.Contracts\VideoHosting.Auth.Repositories.Contracts.csproj", "{EC7471DD-3308-4A19-8079-06D431A0C1CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Auth.Repositories.Contracts", "VideoHostingApi.Auth.Repositories.Contracts\VideoHostingApi.Auth.Repositories.Contracts.csproj", "{EC7471DD-3308-4A19-8079-06D431A0C1CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Repositories", "VideoHostingApi.Common.Repositories\VideoHostingApi.Common.Repositories.csproj", "{7C8C3A7C-495B-42E3-9DC3-9AE8120C7F4D}"
 EndProject

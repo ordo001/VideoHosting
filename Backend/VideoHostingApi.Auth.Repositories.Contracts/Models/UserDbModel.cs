@@ -1,6 +1,6 @@
 using VideoHostingApi.Auth.Entities;
 
-namespace VideoHosting.Auth.Repositories.Contracts.Models;
+namespace VideoHostingApi.Auth.Repositories.Contracts.Models;
 
 /// <summary>
 /// Модель пользователя из базы данных
