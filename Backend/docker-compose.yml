@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  # PostgreSQL для авторизации
+  VideoHostingAuthDb:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Qwerty123456!
+      POSTGRES_DB: AuthDb
+    ports:
+      - "5433:5432"
+    volumes:
+      - auth_data:/var/lib/postgresql/data
+        
+  # PostgreSQL для файлов
+  VideoHostingFileDb:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Qwerty123456!
+      POSTGRES_DB: FileDb
+    ports:
+      - "5434:5432"
+    volumes:
+      - file_data:/var/lib/postgresql/data
+        
+  # MinIO 
+  VideoHostingS3:
+    image: minio/minio:latest
+    container_name: VideoHostingS3
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+  
+volumes:
+  auth_data:
+  file_data:
+  minio_data:

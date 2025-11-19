@@ -1,7 +1,5 @@
-using System.Runtime.InteropServices.ComTypes;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using VideoHostingApi.FileService.Service.Contracts.Models;
 
 namespace VideoHostingApi.FileService.Web;
