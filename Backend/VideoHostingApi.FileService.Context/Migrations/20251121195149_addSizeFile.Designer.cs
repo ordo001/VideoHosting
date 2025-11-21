@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VideoHostingApi.FileService.Context;
@@ -11,9 +12,11 @@ using VideoHostingApi.FileService.Context;
 namespace VideoHostingApi.FileService.Context.Migrations
 {
     [DbContext(typeof(FileServiceContext))]
-    partial class FileServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20251121195149_addSizeFile")]
+    partial class addSizeFile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

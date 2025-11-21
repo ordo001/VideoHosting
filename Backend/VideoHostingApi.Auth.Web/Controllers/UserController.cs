@@ -12,7 +12,7 @@ namespace VideoHostingApi.Auth.Web.Controllers;
 /// </summary>
 [Route("[controller]")]
 [ApiController]
-[Authorize(Roles = "admin, moder")]
+//[Authorize(Roles = "admin, moder")]
 public class UserController(IUserServices userServices, IMapper mapper) : ControllerBase
 {
     

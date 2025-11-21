@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VideoHostingApi.FileService.Service.Contracts;
@@ -9,6 +10,7 @@ namespace VideoHostingApi.FileService.Web.Controllers;
 
 [Route("[controller]")]
 [ApiController]
+[Authorize]
 public class VideoController(IVideoService fileService, IMapper mapper) : ControllerBase
 {
 
@@ -17,6 +19,7 @@ public class VideoController(IVideoService fileService, IMapper mapper) : Contro
     {
         var model = mapper.Map<AddFileModel>(file);
         model.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+        
         await fileService.UploadFile(model, cancellationToken);
         return Ok();
     }
