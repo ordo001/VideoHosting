@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.21">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Minio" Version="6.0.5" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\VideoHostingApi.Common.Web\VideoHostingApi.Common.Web.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.FileService.Context\VideoHostingApi.FileService.Context.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.FileService.Entities\VideoHostingApi.FileService.Entities.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.FileService.Repositories.Contracts\VideoHostingApi.FileService.Repositories.Contracts.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.FileService.Repositories\VideoHostingApi.FileService.Repositories.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.FileService.Service.Contracts\VideoHostingApi.FileService.Service.Contracts.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.FileService.Service\VideoHostingApi.FileService.Service.csproj" />
+    </ItemGroup>
+
+</Project>
