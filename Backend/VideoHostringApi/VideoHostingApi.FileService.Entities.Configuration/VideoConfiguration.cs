@@ -6,7 +6,7 @@ using VideoHostingApi.FileService.Entities;
 namespace VideoHostingApi.FileService.Entities.Configuration;
 
 /// <summary>
-/// Конфигурация сущности <see cref="Video"/>
+/// Конфигурация сущности <see cref="VideoFile"/>
 /// </summary>
 public class VideoConfiguration : IFileServiceEntityConfiguration, IEntityTypeConfiguration<Video>
 {
@@ -15,6 +15,5 @@ public class VideoConfiguration : IFileServiceEntityConfiguration, IEntityTypeCo
         builder.ToTable("Video");
         
         builder.HasKey(p => p.Id);
-        builder.HasIndex(p => p.Name).IsUnique();
     }
 }

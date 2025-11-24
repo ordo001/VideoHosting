@@ -2,10 +2,12 @@ using System.Security.Claims;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using VideoHostingApi.FileService.Entities;
+using VideoHostingApi.FileService.Entities.Enums;
 using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Service.Contracts;
 using VideoHostingApi.FileService.Service.Contracts.Models;
 using VideoHostingApi.FileService.Service.Exceptions;
+using VideoHostringApi.Common.Messaging.Contracts;
 using ObjectNotFoundException = Minio.Exceptions.ObjectNotFoundException;
 
 namespace VideoHostingApi.FileService.Service;
@@ -13,16 +15,60 @@ namespace VideoHostingApi.FileService.Service;
 /// <summary>
 /// Сервис для работы с видео
 /// </summary>
-public class VideoService(IObjectStorageRepository<Video> videoObjectStorageRepository,
-    IVideoRepository videoRepository, IMapper mapper ) : IVideoService
+public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorageRepository,
+    IVideoRepository videoRepository, IVideoFileRepository videoFileRepository,
+    IMapper mapper, IMessageProducer messageProducer) : IVideoService
 {
-    public async Task<string> GetPresignedUploadUrl(string name, CancellationToken cancellationToken)
+    public async Task<CreateVideoModel> GetPresignedUploadUrl(Guid userId, CancellationToken cancellationToken)
     { 
         // TODO: Сделать отдельный эндпоинт для проверки подтверждения, что клиент загрузил файл
+
+        var video = new Video
+        {
+            UserId = userId,
+            Status = Status.PendingUpload,
+            CreatedAt = DateTime.UtcNow,
+        };
+        
+        videoRepository.Add(video);
+
+        var objectName = $"raw/{video.Id}/master.mp4";
+
+        var file = new VideoFile
+        {
+            VideoId = video.Id,
+            Path = objectName,
+            Type = "master",
+            Quality = null,
+            CreatedAt = video.CreatedAt,
+        };
+        
+        videoFileRepository.Add(file);
         
         await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
-        var url = await videoObjectStorageRepository.GetPresignedUploadUrl(name);
-        return url;
+        var url = await videoObjectStorageRepository.GetPresignedUploadUrl(objectName);
+        
+        await videoRepository.SaveChanges(cancellationToken);
+        await videoFileRepository.SaveChanges(cancellationToken);
+        return new CreateVideoModel
+        {
+            VideoId = video.Id,
+            UploadUrl = url,
+            ObjectKey = objectName,
+        };
+    }
+
+    public async Task UploadCompete(Guid videoId, CancellationToken cancellationToken)
+    {
+        /*var video = await videoRepository.GetById(videoId, cancellationToken);
+        if (video is null)
+        {
+            throw new FileEntityNotFoundException($"Видео с идентификатором {videoId} не найдено");
+        }*/
+
+        //video.Status = Status.Uploaded;
+        await messageProducer.SendMessage("video-processing", "aboba");
+
     }
 
     public async Task<string> GetPresignedDownloadUrl(string name, CancellationToken cancellationToken)
@@ -44,16 +90,16 @@ public class VideoService(IObjectStorageRepository<Video> videoObjectStorageRepo
     public async Task UploadFile(AddFileModel addFileModel, CancellationToken cancellationToken)
     {
         await EntityIsExists(addFileModel.Name, cancellationToken);
-        var video = new Video
+        /*var video = new VideoFile
         {
             ContentType = addFileModel.ContentType,
             Name = addFileModel.Name,
             UploadedAt = DateTime.UtcNow,
             Size = addFileModel.Size,
             UserId = addFileModel.UserId
-        };
+        };*/
         
-        videoRepository.Add(video);
+        //videoRepository.Add(video);
         await videoRepository.SaveChanges(cancellationToken);
         
         await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);

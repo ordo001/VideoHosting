@@ -12,7 +12,6 @@ public class FileServiceMapperProfile : Profile
 {
     public FileServiceMapperProfile()
     {
-        CreateMap<Video, FileMetadata>(MemberList.Destination).ReverseMap();
-        CreateMap<Image, FileMetadata>(MemberList.Destination).ReverseMap();
+        CreateMap<VideoFile, FileMetadata>(MemberList.Destination).ReverseMap();
     }
 }

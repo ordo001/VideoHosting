@@ -28,11 +28,9 @@ public static class FileServiceConfigure
 
         services.AddSingleton(minioClient);
         
-        services.AddScoped<IObjectStorageRepository<Video>>(sp =>
-            new MinioRepository<Video>(minioClient, configuration["MinioBuckets:videos"]!));
+        services.AddScoped<IObjectStorageRepository<VideoFile>>(sp =>
+            new MinioRepository<VideoFile>(minioClient, configuration["MinioBuckets:videos"]!));
         
-        services.AddScoped<IObjectStorageRepository<Image>>(sp =>
-            new MinioRepository<Image>(minioClient, configuration["MinioBuckets:images"]!));
 
         return services;
     }

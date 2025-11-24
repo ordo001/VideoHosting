@@ -20,6 +20,7 @@
     <ItemGroup>
       <ProjectReference Include="..\VideoHostingApi.Auth.Services.Contracts\VideoHostingApi.Auth.Services.Contracts.csproj" />
       <ProjectReference Include="..\VideoHostingApi.Auth.Web\VideoHostingApi.Auth.Web.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.Common.Messaging\VideoHostingApi.Common.Messaging.csproj" />
       <ProjectReference Include="..\VideoHostingApi.Common.Web\VideoHostingApi.Common.Web.csproj" />
       <ProjectReference Include="..\VideoHostingApi.FileService.Service\VideoHostingApi.FileService.Service.csproj" />
       <ProjectReference Include="..\VideoHostingApi.FileService.Web\VideoHostingApi.FileService.Web.csproj" />

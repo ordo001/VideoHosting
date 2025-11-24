@@ -15,7 +15,8 @@ public class VideoRepository(FileServiceContext context) : WriteRepositoryBase<V
 
     public async Task<Video?> GetByName(string name, CancellationToken cancellationToken)
     {
-        return await context.Set<Video>().FirstOrDefaultAsync(x => x.Name == name, cancellationToken);
+        throw new NotImplementedException();
+        //return await context.Set<Video>().FirstOrDefaultAsync(x => x.Name == name, cancellationToken);
     }
 
     public async Task<IEnumerable<Video>> GetAll(CancellationToken cancellationToken)

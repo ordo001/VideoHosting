@@ -8,13 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using VideoHostingApi.Auth.Context;
 using VideoHostingApi.FileService.Context;
 using VideoHostingApi.Web.Extentions;
+using VideoHostingApi.Common.Messaging;
 
 
 namespace VideoHostingApi.Web;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ public class Program
         builder.Services.ConfigureAuthService();
         builder.Services.RegisterAutoMapper();
         builder.Services.ConfigureAuth(builder.Configuration);
+        await builder.Services.AddRabbitMq(builder.Configuration);
         
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
@@ -85,6 +87,6 @@ public class Program
 
         app.MapControllers();
 
-        app.Run();
+        await app.RunAsync();
     }
 }
