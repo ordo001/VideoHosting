@@ -10,9 +10,9 @@ namespace VideoHostingApi.Common.Messaging;
 /// </summary>
 public class RabbitMqMessageProducer(IChannel channel) : IMessageProducer
 {
-    public async Task SendMessage<T>(string queue, T message)
+    public async Task SendMessage<T>(string queue, T message, CancellationToken cancellationToken)
     {
-        await channel.QueueDeclareAsync(queue, durable: true, exclusive: false, autoDelete: false);
+        await channel.QueueDeclareAsync(queue, durable: true, exclusive: false, autoDelete: false, cancellationToken: cancellationToken);
 
         var json = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(json);
@@ -23,8 +23,8 @@ public class RabbitMqMessageProducer(IChannel channel) : IMessageProducer
         await channel.BasicPublishAsync(
             exchange: "",
             routingKey: queue,
-            body: body
+            body: body,
+            cancellationToken
         );
-        
     }
 }

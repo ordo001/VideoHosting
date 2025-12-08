@@ -14,17 +14,17 @@ public class Worker : BackgroundService
         this.consumer = consumer;
     }
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        while (!cancellationToken.IsCancellationRequested)
         {
             if (logger.IsEnabled(LogLevel.Information))
             {
                 logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             }
-            await consumer.StartConsuming("video-processing");
+            await consumer.StartConsuming("video-processing", cancellationToken);
 
-            await Task.Delay(1000, stoppingToken);
+            await Task.Delay(1000, cancellationToken);
         }
     }
 }

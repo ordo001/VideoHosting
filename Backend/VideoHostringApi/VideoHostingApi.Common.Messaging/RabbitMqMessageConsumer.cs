@@ -14,15 +14,16 @@ namespace VideoHostingApi.Common.Messaging;
 /// <typeparam name="T"></typeparam>
 public class RabbitMqMessageConsumer<T>(IChannel channel, IServiceProvider services) : IMessageConsumer<T>
 {
-    public async Task StartConsuming(string queue)
+    public async Task StartConsuming(string queue, CancellationToken cancellationToken)
     { 
-        await channel.QueueDeclareAsync(queue, durable: true, exclusive: false, autoDelete: false);
+        await channel.QueueDeclareAsync(queue, durable: true, exclusive: false, autoDelete: false, cancellationToken: cancellationToken);
         var consumer = new AsyncEventingBasicConsumer(channel);
 
-        consumer.ReceivedAsync += async (senger, args) =>
+        consumer.ReceivedAsync += async (sanger, args) =>
         {
             try
             {
+                var linkedToken = CancellationTokenSource.CreateLinkedTokenSource(args.CancellationToken, cancellationToken).Token;
                 var json = Encoding.UTF8.GetString(args.Body.ToArray());
                 Console.WriteLine("Получено: " + json);
 
@@ -31,14 +32,16 @@ public class RabbitMqMessageConsumer<T>(IChannel channel, IServiceProvider servi
                 if (message is null)
                 {
                     Console.WriteLine("Ошибка десериализации ");
-                    await channel.BasicAckAsync(args.DeliveryTag, multiple: false);
+                    await channel.BasicAckAsync(args.DeliveryTag, false, linkedToken);
                     return;
                 }
 
                 await using var scope = services.CreateAsyncScope();
-                var hendler = scope.ServiceProvider.GetRequiredService<IMessageHandler<T>>();
+                var handler = scope.ServiceProvider.GetRequiredService<IMessageHandler<T>>();
 
-                await hendler.HandleAsync(message);
+                await handler.HandleAsync(message);
+                
+                await channel.BasicAckAsync(args.DeliveryTag, false, linkedToken);
             }
             catch (Exception ex)
             {
@@ -50,6 +53,7 @@ public class RabbitMqMessageConsumer<T>(IChannel channel, IServiceProvider servi
         await channel.BasicConsumeAsync(
             queue: queue,
             autoAck: false,
-            consumer: consumer);
+            consumer: consumer,
+            cancellationToken);
     }
 }

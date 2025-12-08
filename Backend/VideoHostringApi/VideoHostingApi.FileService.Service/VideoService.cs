@@ -70,7 +70,7 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
         
         //await messageProducer.SendMessage("video-processing",video.Id);
         
-        await messageProducer.SendMessage("video-processing",new FileUploadedEvent {  VideoId = videoId });
+        await messageProducer.SendMessage("video-processing",new FileUploadedEvent {  VideoId = videoId }, cancellationToken);
 
     }
 

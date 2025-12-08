@@ -8,5 +8,5 @@ public interface IMessageProducer
     /// <summary>
     /// Отправить сообщение в очередь
     /// </summary>
-    public Task SendMessage<T>(string queue, T message);
+    public Task SendMessage<T>(string queue, T message, CancellationToken cancellationToken);
 }

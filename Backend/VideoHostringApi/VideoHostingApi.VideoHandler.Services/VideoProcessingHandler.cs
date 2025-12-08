@@ -12,6 +12,7 @@ public class VideoProcessingHandler(VideoHandlerContext context) : IMessageHandl
     public Task HandleAsync(VideoProcessingMessage videoProcessingMessage)
     {
         Console.WriteLine("Обработка типа да " + videoProcessingMessage.VideoId);
+        // TODO: Создать FFmpeg сервис для обработки видео
         return Task.CompletedTask;
     }
 }
