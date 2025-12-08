@@ -4,7 +4,6 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>dotnet-VideoHostringApi.FFmpeg.Worker-0c675300-5ac9-494b-a6f5-648e0295e10f</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>

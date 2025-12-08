@@ -1,4 +1,4 @@
-namespace VideoHostringApi.FFmpeg.Worker;
+namespace VideoHostingApi.VideoHandler.Worker;
 
 public class Worker : BackgroundService
 {

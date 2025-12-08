@@ -58,9 +58,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.Common.Mess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostringApi.Common.Messaging.Contracts", "VideoHostringApi.Common.Messaging.Contracts\VideoHostringApi.Common.Messaging.Contracts.csproj", "{49079342-C876-4794-A3B2-4F5C3C72618F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VideoHostingApi.FFmpeg", "VideoHostingApi.FFmpeg", "{78AD4E98-F069-429E-87AE-642710574192}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VideoHostingApi.VideoHandler", "VideoHostingApi.VideoHandler", "{78AD4E98-F069-429E-87AE-642710574192}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostringApi.FFmpeg.Worker", "VideoHostringApi.FFmpeg.Worker\VideoHostringApi.FFmpeg.Worker.csproj", "{188F9B55-0F69-4572-B57F-1A41FD7091C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoHostingApi.VideoHandler.Worker", "VideoHostingApi.VideoHandler.Worker\VideoHostingApi.VideoHandler.Worker.csproj", "{188F9B55-0F69-4572-B57F-1A41FD7091C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
