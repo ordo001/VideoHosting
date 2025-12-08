@@ -7,11 +7,17 @@ using VideoHostringApi.VideoHandler.Context;
 
 namespace VideoHostingApi.VideoHandler.Worker.Extentions;
 
-public static class ConfigureVideoHandler
+/// <summary>
+/// Конфигурации для обработчика видео
+/// </summary>
+public static class VideoHandlerConfigure
 {
-    public static IServiceCollection ConfigureFileService(this IServiceCollection services)
+    /// <summary>
+    /// Сконфигурировать зависимости обработчика видео
+    /// </summary>
+    public static IServiceCollection ConfigureVideoHandler(this IServiceCollection services)
     {
-        services.AddScoped<IMessageHandler<VideoProcessingMessage>, FFmpegVideoProcessingHandler>();
+        services.AddScoped<IMessageHandler<VideoProcessingMessage>, VideoProcessingHandler>();
         services.AddSingleton<IMessageConsumer<VideoProcessingMessage>, RabbitMqMessageConsumer<VideoProcessingMessage>>();
         
         return services;
