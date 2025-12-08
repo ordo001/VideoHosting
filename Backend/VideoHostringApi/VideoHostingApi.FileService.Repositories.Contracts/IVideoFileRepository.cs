@@ -1,5 +1,5 @@
+using VideoHostingApi.Common.Entities.Video;
 using VideoHostingApi.Common.Repositories.Contracts;
-using VideoHostingApi.FileService.Entities;
 
 namespace VideoHostingApi.FileService.Repositories.Contracts;
 

@@ -23,15 +23,12 @@ public static class RabbitMqExtensions
             Password = options.Password,
             VirtualHost = options.VirtualHost
         };
-
         services.AddSingleton<IConnectionFactory>(factory);
 
         var connection = await factory.CreateConnectionAsync();
+        services.AddSingleton(connection);
 
-         services.AddSingleton(connection);
-
-         var channel = await connection.CreateChannelAsync();
-
+        var channel = await connection.CreateChannelAsync();
         services.AddSingleton(channel);
 
         services.AddSingleton<IMessageProducer, RabbitMqMessageProducer>();

@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VideoHostingApi.Common.Entities.Video;
 
-namespace VideoHostingApi.FileService.Entities.Configuration;
+namespace VideoHostingApi.Common.Entities.Configuration.Video;
 
 public class VideoFileConfiguration : IFileServiceEntityConfiguration, IEntityTypeConfiguration<VideoFile>
 {

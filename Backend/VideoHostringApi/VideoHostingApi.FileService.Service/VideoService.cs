@@ -1,11 +1,12 @@
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
-using VideoHostingApi.FileService.Entities;
-using VideoHostingApi.FileService.Entities.Enums;
+using VideoHostingApi.Common.Entities.Video;
+using VideoHostingApi.Common.Entities.Video.Enums;
 using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Service.Contracts;
 using VideoHostingApi.FileService.Service.Contracts.Models;
+using VideoHostingApi.FileService.Service.Contracts.Models.Events;
 using VideoHostingApi.FileService.Service.Exceptions;
 using VideoHostringApi.Common.Messaging.Contracts;
 using ObjectNotFoundException = Minio.Exceptions.ObjectNotFoundException;
@@ -20,9 +21,7 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
     IMapper mapper, IMessageProducer messageProducer) : IVideoService
 {
     public async Task<CreateVideoModel> GetPresignedUploadUrl(Guid userId, CancellationToken cancellationToken)
-    { 
-        // TODO: Сделать отдельный эндпоинт для проверки подтверждения, что клиент загрузил файл
-
+    {
         var video = new Video
         {
             UserId = userId,
@@ -48,7 +47,6 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
         await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
         var url = await videoObjectStorageRepository.GetPresignedUploadUrl(objectName);
         
-        await videoRepository.SaveChanges(cancellationToken);
         await videoFileRepository.SaveChanges(cancellationToken);
         return new CreateVideoModel
         {
@@ -60,14 +58,19 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
 
     public async Task UploadCompete(Guid videoId, CancellationToken cancellationToken)
     {
-        /*var video = await videoRepository.GetById(videoId, cancellationToken);
-        if (video is null)
-        {
-            throw new FileEntityNotFoundException($"Видео с идентификатором {videoId} не найдено");
-        }*/
-
-        //video.Status = Status.Uploaded;
-        await messageProducer.SendMessage("video-processing", "aboba");
+        // var video = await videoRepository.GetById(videoId, cancellationToken);
+        // if (video is null)
+        // {
+        //     throw new FileEntityNotFoundException($"Видео с идентификатором {videoId} не найдено");
+        // }
+        //
+        // video.Status = Status.Uploaded;
+        // videoRepository.Update(video);
+        // await videoRepository.SaveChanges(cancellationToken);
+        
+        //await messageProducer.SendMessage("video-processing",video.Id);
+        
+        await messageProducer.SendMessage("video-processing",new FileUploadedEvent {  VideoId = videoId });
 
     }
 

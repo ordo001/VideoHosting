@@ -25,7 +25,7 @@ public class VideoController(IVideoService fileService, IMapper mapper) : Contro
     [HttpPost("complete-upload/{videoId:guid}")]
     public async Task<IActionResult> CompleteUpload(Guid videoId ,CancellationToken cancellationToken)
     {
-        await fileService.UploadCompete(Guid.NewGuid(), cancellationToken);
+        await fileService.UploadCompete(videoId, cancellationToken);
         return Ok();
     }
     

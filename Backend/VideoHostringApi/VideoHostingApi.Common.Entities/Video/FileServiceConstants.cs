@@ -1,4 +1,4 @@
-namespace VideoHostingApi.FileService.Entities;
+namespace VideoHostingApi.Common.Entities.Video;
 
 /// <summary>
 /// Константы

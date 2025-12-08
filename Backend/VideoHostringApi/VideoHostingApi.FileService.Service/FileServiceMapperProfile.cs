@@ -1,6 +1,5 @@
 using AutoMapper;
-using VideoHostingApi.FileService.Entities;
-using VideoHostingApi.FileService.Repositories.Contracts.Models;
+using VideoHostingApi.Common.Entities.Video;
 using VideoHostingApi.FileService.Service.Contracts.Models;
 
 namespace VideoHostingApi.FileService.Service;

@@ -20,6 +20,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\VideoHostingApi.Common.Context\VideoHostingApi.Common.Context.csproj"/>
+        <ProjectReference Include="..\VideoHostingApi.Common.Entities.Configuration\VideoHostingApi.Common.Entities.Configuration.csproj" />
         <ProjectReference Include="..\VideoHostingApi.FileService.Entities.Configuration\VideoHostingApi.FileService.Entities.Configuration.csproj"/>
     </ItemGroup>
 

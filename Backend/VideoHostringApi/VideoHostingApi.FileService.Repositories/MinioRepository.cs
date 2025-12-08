@@ -1,6 +1,6 @@
 using Minio;
 using Minio.DataModel.Args;
-using VideoHostingApi.FileService.Entities;
+using VideoHostingApi.Common.Entities.Video;
 using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Repositories.Contracts.Models;
 

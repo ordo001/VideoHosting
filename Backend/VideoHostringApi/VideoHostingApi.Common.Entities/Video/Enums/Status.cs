@@ -1,4 +1,4 @@
-namespace VideoHostingApi.FileService.Entities.Enums;
+namespace VideoHostingApi.Common.Entities.Video.Enums;
 
 /// <summary>
 /// Статус видео

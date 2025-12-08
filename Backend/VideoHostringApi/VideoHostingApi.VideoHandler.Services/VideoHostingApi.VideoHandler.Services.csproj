@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\VideoHostingApi.VideoHandler.Services.Contracts\VideoHostingApi.VideoHandler.Services.Contracts.csproj" />
+      <ProjectReference Include="..\VideoHostringApi.Common.Messaging.Contracts\VideoHostringApi.Common.Messaging.Contracts.csproj" />
+      <ProjectReference Include="..\VideoHostringApi.VideoHandler.Context\VideoHostringApi.VideoHandler.Context.csproj" />
+    </ItemGroup>
+
+</Project>

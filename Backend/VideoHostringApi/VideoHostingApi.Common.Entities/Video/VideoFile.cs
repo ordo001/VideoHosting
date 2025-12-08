@@ -1,7 +1,5 @@
 
-using VideoHostingApi.Common.Entities;
-
-namespace VideoHostingApi.FileService.Entities;
+namespace VideoHostingApi.Common.Entities.Video;
 
 /// <summary>
 /// Модель файла видео

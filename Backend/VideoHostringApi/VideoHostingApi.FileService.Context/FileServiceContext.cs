@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VideoHostingApi.Common.Context;
-using VideoHostingApi.FileService.Entities.Configuration;
+using VideoHostingApi.Common.Entities.Configuration.Video;
 
 namespace VideoHostingApi.FileService.Context;
 

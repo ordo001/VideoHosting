@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Minio;
+using VideoHostingApi.Common.Entities.Video;
 using VideoHostingApi.Common.Web;
-using VideoHostingApi.FileService.Entities;
 using VideoHostingApi.FileService.Repositories;
 using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Service;

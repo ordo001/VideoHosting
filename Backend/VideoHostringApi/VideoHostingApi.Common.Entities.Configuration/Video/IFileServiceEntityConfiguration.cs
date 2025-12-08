@@ -1,4 +1,4 @@
-﻿namespace VideoHostingApi.FileService.Entities.Configuration;
+﻿namespace VideoHostingApi.Common.Entities.Configuration.Video;
 
 /// <summary>
 /// Маркерный интерфейс для конфигурации сущностей

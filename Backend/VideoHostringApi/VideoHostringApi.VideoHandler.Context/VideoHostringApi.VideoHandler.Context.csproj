@@ -8,11 +8,11 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.20" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\VideoHostingApi.Common.Entities\VideoHostingApi.Common.Entities.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.Common.Context\VideoHostingApi.Common.Context.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.Common.Entities.Configuration\VideoHostingApi.Common.Entities.Configuration.csproj" />
     </ItemGroup>
-
+    
 </Project>

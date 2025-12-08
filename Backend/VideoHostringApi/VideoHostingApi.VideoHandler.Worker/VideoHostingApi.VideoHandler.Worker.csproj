@@ -8,5 +8,14 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\VideoHostingApi.Common.Messaging\VideoHostingApi.Common.Messaging.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.VideoHandler.Services.Contracts\VideoHostingApi.VideoHandler.Services.Contracts.csproj" />
+      <ProjectReference Include="..\VideoHostingApi.VideoHandler.Services\VideoHostingApi.VideoHandler.Services.csproj" />
+      <ProjectReference Include="..\VideoHostringApi.Common.Messaging.Contracts\VideoHostringApi.Common.Messaging.Contracts.csproj" />
     </ItemGroup>
 </Project>

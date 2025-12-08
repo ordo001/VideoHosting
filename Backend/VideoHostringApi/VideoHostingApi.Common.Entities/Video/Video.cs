@@ -1,7 +1,6 @@
-using VideoHostingApi.Common.Entities;
-using VideoHostingApi.FileService.Entities.Enums;
+using VideoHostingApi.Common.Entities.Video.Enums;
 
-namespace VideoHostingApi.FileService.Entities;
+namespace VideoHostingApi.Common.Entities.Video;
 
 /// <summary>
 /// Сущность видео
@@ -24,7 +23,7 @@ public class Video : EntityBase
     public Guid UserId { get; set; }
     
     /// <inheritdoc cref="Status"/>
-    public Status  Status { get; set; }
+    public Status Status { get; set; }
     
     /// <summary>
     /// Длительность
