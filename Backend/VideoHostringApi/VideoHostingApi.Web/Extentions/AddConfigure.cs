@@ -1,5 +1,3 @@
-using AutoMapper;
-
 namespace VideoHostingApi.Web.Extentions;
 
 public static class AddConfigure

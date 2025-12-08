@@ -11,5 +11,9 @@ public class VideoFileConfiguration : IFileServiceEntityConfiguration, IEntityTy
         builder.ToTable("VideoFiles");
         
         builder.HasKey(p => p.Id);
+        
+        builder.HasOne(x => x.Video)
+            .WithMany()
+            .HasForeignKey(x => x.VideoId);
     }
 }

@@ -2,7 +2,13 @@ using VideoHostingApi.VideoHandler.Services.Contracts.Models;
 
 namespace VideoHostingApi.VideoHandler.Services.Contracts;
 
+/// <summary>
+/// Интерфейс сервиса обработки видео
+/// </summary>
 public interface IVideoProcessingService
 {
-    public Task ProcessVideoAsync(VideoProcessingMessage videoProcessingMessage);
+    /// <summary>
+    /// Обработать видео
+    /// </summary>
+    public Task ProcessVideoAsync(VideoProcessingModel videoProcessingModel, CancellationToken cancellationToken);
 }

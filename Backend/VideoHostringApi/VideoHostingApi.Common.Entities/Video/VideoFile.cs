@@ -35,4 +35,9 @@ public class VideoFile : EntityBase
     /// Дата добавления
     /// </summary>
     public DateTime CreatedAt { get; set; }
+    
+    /// <summary>
+    /// Навигационное свойство
+    /// </summary>
+    public Video? Video { get; set; } 
 }

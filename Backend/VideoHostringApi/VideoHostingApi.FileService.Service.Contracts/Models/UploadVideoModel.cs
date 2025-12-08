@@ -1,20 +1,10 @@
 namespace VideoHostingApi.FileService.Service.Contracts.Models;
 
 /// <summary>
-/// Модель файла на добавление
+/// Модель для загрузки видео
 /// </summary>
-public class AddFileModel
+public class UploadVideoModel
 {
-    /// <summary>
-    /// Потом файла
-    /// </summary>
-    public Stream FileStream { get; set; } = null!;
-    
-    /// <summary>
-    /// Mime type
-    /// </summary>
-    public string ContentType { get; set; } = string.Empty;
-    
     /// <summary>
     /// Заголовок видео
     /// </summary>
@@ -34,8 +24,4 @@ public class AddFileModel
     /// Публичное ли видео
     /// </summary>
     public bool IsPublic { get; set; }
-    
-    
-    
-    
 }

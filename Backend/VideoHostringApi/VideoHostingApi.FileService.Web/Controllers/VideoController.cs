@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VideoHostingApi.FileService.Service.Contracts;
 using VideoHostingApi.FileService.Service.Contracts.Models;
+using VideoHostingApi.FileService.Web.Models;
 
 namespace VideoHostingApi.FileService.Web.Controllers;
 
@@ -15,10 +16,11 @@ public class VideoController(IVideoService fileService, IMapper mapper) : Contro
 {
     
     [HttpGet("upload-url")]
-    public async Task<IActionResult> GetUploadUrl(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetUploadUrl(UploadVideoRequest uploadVideoRequest, CancellationToken cancellationToken)
     {
-        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
-        var model = await fileService.GetPresignedUploadUrl(userId, cancellationToken);
+        var uploadModel = mapper.Map<UploadVideoModel>(uploadVideoRequest);
+        uploadModel.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+        var model = await fileService.GetPresignedUploadUrl(uploadModel, cancellationToken);
         return Ok(model);
     }
 
@@ -29,11 +31,23 @@ public class VideoController(IVideoService fileService, IMapper mapper) : Contro
         return Ok();
     }
     
-    [HttpGet("download-url")]
-    public async Task<IActionResult> GetDownloadUrl(string fileName, CancellationToken cancellationToken)
+    [HttpGet("download-url/{videoId:guid}")]
+    public async Task<IActionResult> GetDownloadUrl(Guid videoId, CancellationToken cancellationToken)
     {
-        var url = await fileService.GetPresignedDownloadUrl(fileName, cancellationToken);
+        var url = await fileService.GetPresignedDownloadUrl(videoId, cancellationToken);
         return Ok(url);
+    }
+
+    [HttpPost("upload")]
+    public async Task<IActionResult> Upload(UploadFileVideoRequest uploadFileVideoRequest, CancellationToken cancellationToken)
+    {
+        var model = mapper.Map<AddFileModel>(uploadFileVideoRequest);
+        model.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+        model.FileStream = uploadFileVideoRequest.VideoFile.OpenReadStream();
+        model.ContentType = uploadFileVideoRequest.VideoFile.ContentType;
+        
+        await  fileService.UploadFile(model, cancellationToken);
+        return Ok();
     }
     
 }

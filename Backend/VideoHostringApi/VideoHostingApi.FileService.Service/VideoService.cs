@@ -1,6 +1,4 @@
-using System.Security.Claims;
 using AutoMapper;
-using Microsoft.Extensions.Logging;
 using VideoHostingApi.Common.Entities.Video;
 using VideoHostingApi.Common.Entities.Video.Enums;
 using VideoHostingApi.FileService.Repositories.Contracts;
@@ -20,18 +18,21 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
     IVideoRepository videoRepository, IVideoFileRepository videoFileRepository,
     IMapper mapper, IMessageProducer messageProducer) : IVideoService
 {
-    public async Task<CreateVideoModel> GetPresignedUploadUrl(Guid userId, CancellationToken cancellationToken)
+    public async Task<CreateVideoModel> GetPresignedUploadUrl(UploadVideoModel uploadVideoModel, CancellationToken cancellationToken)
     {
         var video = new Video
         {
-            UserId = userId,
+            UserId = uploadVideoModel.UserId,
+            Title = uploadVideoModel.Title,
+            Description = uploadVideoModel.Description,
             Status = Status.PendingUpload,
+            IsPublic = uploadVideoModel.IsPublic,
             CreatedAt = DateTime.UtcNow,
         };
         
         videoRepository.Add(video);
 
-        var objectName = $"raw/{video.Id}/master.mp4";
+        var objectName = $"{video.Id}/master";
 
         var file = new VideoFile
         {
@@ -43,11 +44,11 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
         };
         
         videoFileRepository.Add(file);
+        await videoFileRepository.SaveChanges(cancellationToken);
         
         await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
         var url = await videoObjectStorageRepository.GetPresignedUploadUrl(objectName);
         
-        await videoFileRepository.SaveChanges(cancellationToken);
         return new CreateVideoModel
         {
             VideoId = video.Id,
@@ -74,108 +75,95 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
 
     }
 
-    public async Task<string> GetPresignedDownloadUrl(string name, CancellationToken cancellationToken)
+    public async Task<string> GetPresignedDownloadUrl(Guid videoId, CancellationToken cancellationToken)
     {
         try
         {
-            await CheckEntityByName(name, cancellationToken);
+            var video = await CheckVideoById(videoId, cancellationToken);
             
             await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
-            var url = await videoObjectStorageRepository.GetPresignedDownloadUrl(name);
+            var objectName = $"{video.Id}/master";
+            
+            var url = await videoObjectStorageRepository.GetPresignedDownloadUrl(objectName);
             return url;
         }
         catch (ObjectNotFoundException ex)
         {
-            throw new VideoHostingApi.FileService.Service.Exceptions.ObjectNotFoundException($"Видео с названием {name} не найден в S3 хранилище");
+            throw new VideoHostingApi.FileService.Service.Exceptions.ObjectNotFoundException($"Видео с идентификатором {videoId} не найден в S3 хранилище");
         }
     }
 
     public async Task UploadFile(AddFileModel addFileModel, CancellationToken cancellationToken)
     {
-        await EntityIsExists(addFileModel.Name, cancellationToken);
-        /*var video = new VideoFile
+        var video = new Video
         {
-            ContentType = addFileModel.ContentType,
-            Name = addFileModel.Name,
-            UploadedAt = DateTime.UtcNow,
-            Size = addFileModel.Size,
-            UserId = addFileModel.UserId
-        };*/
+            UserId = addFileModel.UserId,
+            Title = addFileModel.Title,
+            Description = addFileModel.Description,
+            Status = Status.PendingUpload,
+            IsPublic = addFileModel.IsPublic,
+            CreatedAt = DateTime.UtcNow,
+        };
+        videoRepository.Add(video);
         
-        //videoRepository.Add(video);
-        await videoRepository.SaveChanges(cancellationToken);
+        var objectName = $"{video.Id}/master";
+        
+        var file = new VideoFile
+        {
+            VideoId = video.Id,
+            Path = objectName,
+            Type = "master",
+            Quality = null,
+            CreatedAt = video.CreatedAt,
+        };
+        
+        videoFileRepository.Add(file);
+        await videoFileRepository.SaveChanges(cancellationToken);
         
         await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
-        await videoObjectStorageRepository.UploadFile(addFileModel.Name, addFileModel.FileStream, addFileModel.ContentType, cancellationToken);
+        await videoObjectStorageRepository.UploadFile(file.Path, addFileModel.FileStream, addFileModel.ContentType, cancellationToken);
     }
 
     public async Task<FileModel> DownloadFile(string name, CancellationToken cancellationToken)
     {
-        try
-        {
-            await CheckEntityByName(name, cancellationToken);
-            
-            await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
-            var model = await videoObjectStorageRepository.DownloadFile(name, cancellationToken);
-            return new FileModel{ FileStream = model.FileStream, ContentType = model.ContentType, FileName = model.FileName }; // TODO: Заменить на автомаппинг
-        }
-        catch (ObjectNotFoundException ex)
-        {
-            throw new VideoHostingApi.FileService.Service.Exceptions.ObjectNotFoundException($"Видео с названием {name} не найден в S3 хранилище");
-        }
+        // try
+        // {
+        //     await CheckVideoById(name, cancellationToken);
+        //     
+        //     await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
+        //     var model = await videoObjectStorageRepository.DownloadFile(name, cancellationToken);
+        //     return new FileModel{ FileStream = model.FileStream, ContentType = model.ContentType, FileName = model.FileName }; // TODO: Заменить на автомаппинг
+        // }
+        // catch (ObjectNotFoundException ex)
+        // {
+        //     throw new VideoHostingApi.FileService.Service.Exceptions.ObjectNotFoundException($"Видео с названием {name} не найден в S3 хранилище");
+        // }
+        throw new NotImplementedException();
     }
-
-    public async Task<List<string>> GetListObjects(CancellationToken cancellationToken)
-    {
-        var result = await videoObjectStorageRepository.GetListObjects(cancellationToken);
-        return result;
-    }
-
+    
     public async Task DeleteFile(string name, CancellationToken cancellationToken)
     {
-        await CheckEntityByName(name, cancellationToken);
-        
-        try
-        {
-            await videoObjectStorageRepository.DeleteFile(name, cancellationToken);
-        }
-        catch (ObjectNotFoundException ex)
-        {
-            throw new VideoHostingApi.FileService.Service.Exceptions.ObjectNotFoundException($"Видео с названием {name} не найден в S3 хранилище");
-        }
+        // await CheckVideoById(name, cancellationToken);
+        //
+        // try
+        // {
+        //     await videoObjectStorageRepository.DeleteFile(name, cancellationToken);
+        // }
+        // catch (ObjectNotFoundException ex)
+        // {
+        //     throw new VideoHostingApi.FileService.Service.Exceptions.ObjectNotFoundException($"Видео с названием {name} не найден в S3 хранилище");
+        // }
+        throw new NotImplementedException();
     }
-
-    public async Task<FileMetadata> GetMetadata(string fileName, CancellationToken cancellationToken)
+    
+    private async Task<Video> CheckVideoById(Guid videoId, CancellationToken cancellationToken)
     {
-        var video = await videoRepository.GetByName(fileName, cancellationToken);
+        var video = await videoRepository.GetById(videoId, cancellationToken);
         if (video is null)
         {
-            throw new FileEntityNotFoundException($"Сущность видео с названием {fileName} не найдена");
+            throw new FileEntityNotFoundException($"Сущность с идентификатором {videoId} не найдена");
         }
-        return mapper.Map<FileMetadata>(video);
-    }
 
-    public async Task<IEnumerable<FileMetadata>> GetAllMetadata(CancellationToken cancellationToken)
-    {
-        var video = await videoRepository.GetAll(cancellationToken);
-        return mapper.Map<IEnumerable<FileMetadata>>(video);
-    }
-
-    private async Task CheckEntityByName(string name, CancellationToken cancellationToken)
-    {
-        var video = await videoRepository.GetByName(name, cancellationToken);
-        if (video is null)
-        {
-            throw new FileEntityNotFoundException($"Сущность с названием {name} не найдена");
-        }
-    }
-
-    private async Task EntityIsExists(string name, CancellationToken cancellationToken)
-    {
-        var video = await videoRepository.GetByName(name, cancellationToken);
-        if (video is not null)
-        {
-            throw new FileEntityIsExist($"Сущность с названием {name} уже существует");
-        }   
+        return video;
     }
 }
