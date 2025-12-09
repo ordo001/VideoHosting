@@ -10,5 +10,5 @@ public interface IVideoProcessingService
     /// <summary>
     /// Обработать видео
     /// </summary>
-    public Task ProcessVideoAsync(VideoProcessingModel videoProcessingModel, CancellationToken cancellationToken);
+    public Task ProcessVideoAsync(Guid videoId, CancellationToken cancellationToken);
 }

@@ -1,10 +1,10 @@
 using Minio;
 using Minio.DataModel.Args;
 using VideoHostingApi.Common.Entities.Video;
-using VideoHostingApi.FileService.Repositories.Contracts;
-using VideoHostingApi.FileService.Repositories.Contracts.Models;
+using VideoHostingApi.Common.Repositories.Contracts;
+using VideoHostingApi.Common.Repositories.Contracts.Models;
 
-namespace VideoHostingApi.FileService.Repositories;
+namespace VideoHostingApi.Common.Repositories;
 
 /// <summary>
 /// Репозиторий для доступа к S3 хранилищу Minio

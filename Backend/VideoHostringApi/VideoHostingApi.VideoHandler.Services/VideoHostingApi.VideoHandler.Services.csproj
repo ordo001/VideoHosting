@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\VideoHostingApi.Common.Repositories.Contracts\VideoHostingApi.Common.Repositories.Contracts.csproj" />
       <ProjectReference Include="..\VideoHostingApi.VideoHandler.Services.Contracts\VideoHostingApi.VideoHandler.Services.Contracts.csproj" />
       <ProjectReference Include="..\VideoHostringApi.Common.Messaging.Contracts\VideoHostringApi.Common.Messaging.Contracts.csproj" />
       <ProjectReference Include="..\VideoHostringApi.VideoHandler.Context\VideoHostringApi.VideoHandler.Context.csproj" />
@@ -14,6 +15,12 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="FFmpeg.LGPL" Version="20251209.1.0" />
     </ItemGroup>
+
+    <ItemGroup>
+        <None Include="FFmpeg\**" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
 
 </Project>

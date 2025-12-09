@@ -12,4 +12,8 @@
       <ProjectReference Include="..\VideoHostingApi.Common.Repositories.Contracts\VideoHostingApi.Common.Repositories.Contracts.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Minio" Version="6.0.5" />
+    </ItemGroup>
+
 </Project>

@@ -2,6 +2,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Minio;
 using VideoHostingApi.Common.Entities.Video;
+using VideoHostingApi.Common.Repositories;
+using VideoHostingApi.Common.Repositories.Contracts;
 using VideoHostingApi.Common.Web;
 using VideoHostingApi.FileService.Repositories;
 using VideoHostingApi.FileService.Repositories.Contracts;

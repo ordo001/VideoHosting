@@ -1,6 +1,7 @@
 using AutoMapper;
 using VideoHostingApi.Common.Entities.Video;
 using VideoHostingApi.Common.Entities.Video.Enums;
+using VideoHostingApi.Common.Repositories.Contracts;
 using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Service.Contracts;
 using VideoHostingApi.FileService.Service.Contracts.Models;

@@ -14,9 +14,10 @@ public class Program
         var fileConnectionString = builder.Configuration.GetConnectionString("FileDbConnection");
         builder.Services.AddDbContext<VideoHandlerContext>(x => x.UseNpgsql(fileConnectionString));
         
-        builder.Services.ConfigureVideoHandler();
+        builder.Services.ConfigureVideoHandler(builder.Configuration);
+        builder.Services.RegisterAutoMapper();
         await builder.Services.AddRabbitMq(builder.Configuration);
-        builder.Services.AddHostedService<VideoHostingApi.VideoHandler.Worker.Worker>();
+        builder.Services.AddHostedService<Worker>();
 
         var host = builder.Build();
         await host.RunAsync();

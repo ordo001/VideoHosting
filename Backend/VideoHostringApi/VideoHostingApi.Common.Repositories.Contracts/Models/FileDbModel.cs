@@ -1,4 +1,4 @@
-namespace VideoHostingApi.FileService.Repositories.Contracts.Models;
+namespace VideoHostingApi.Common.Repositories.Contracts.Models;
 
 /// <summary>
 /// Модель файла из S3 хранилища

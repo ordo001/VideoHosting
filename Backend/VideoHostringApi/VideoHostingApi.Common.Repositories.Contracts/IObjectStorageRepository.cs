@@ -1,6 +1,6 @@
-using VideoHostingApi.FileService.Repositories.Contracts.Models;
+using VideoHostingApi.Common.Repositories.Contracts.Models;
 
-namespace VideoHostingApi.FileService.Repositories.Contracts;
+namespace VideoHostingApi.Common.Repositories.Contracts;
 
 /// <summary>
 /// Репозиторий для доступа к данным S3
