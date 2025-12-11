@@ -136,7 +136,6 @@ public class VideoProcessingService(IObjectStorageRepository<VideoFile> videoObj
                 Quality = Path.GetRelativePath(tempDir, ts).Replace("\\", "/").Split('/').First()
             });
         }
-        
         return  result;
     }
     
