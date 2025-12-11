@@ -91,7 +91,7 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
         }
     }
 
-    public async Task UploadFile(AddFileModel addFileModel, CancellationToken cancellationToken)
+    public async Task<Guid> UploadFile(AddFileModel addFileModel, CancellationToken cancellationToken)
     {
         var video = new Video
         {
@@ -120,6 +120,23 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
         
         await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
         await videoObjectStorageRepository.UploadFile(file.Path, addFileModel.FileStream, addFileModel.ContentType, cancellationToken);
+        return video.Id;
+    }
+
+    public async Task<HlsModel> GetHlsFile(string path, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await videoObjectStorageRepository.EnsureBucketExistsAsync(cancellationToken);
+            var model = await videoObjectStorageRepository.DownloadFile(path, cancellationToken);
+            var hlsModel = mapper.Map<HlsModel>(model);
+            return hlsModel;
+        }
+        catch (ObjectNotFoundException ex)
+        {
+            throw new VideoHostingApi.FileService.Service.Exceptions.ObjectNotFoundException(
+                $"Видео {path} не найден в S3 хранилище");
+        }
     }
 
     public async Task<FileModel> DownloadFile(string name, CancellationToken cancellationToken)

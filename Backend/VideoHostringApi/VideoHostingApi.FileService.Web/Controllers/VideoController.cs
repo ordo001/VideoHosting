@@ -36,6 +36,14 @@ public class VideoController(IVideoService fileService, IMapper mapper) : Contro
         var url = await fileService.GetPresignedDownloadUrl(videoId, cancellationToken);
         return Ok(url);
     }
+    
+    [HttpGet("hls/{videoId:guid}/{path}")]
+    public async Task<IActionResult> GetHlsFile(Guid videoId, string path, CancellationToken cancellationToken)
+    {
+        var fullPath = Path.Combine(videoId.ToString(), path).Replace("%2F","\\").Replace("\\","/");
+        var file = await fileService.GetHlsFile(fullPath, cancellationToken);
+        return File(file.FileStream!, file.ContentType);
+    }
 
     [HttpPost("upload")]
     public async Task<IActionResult> Upload(UploadFileVideoRequest uploadFileVideoRequest, CancellationToken cancellationToken)
@@ -45,8 +53,8 @@ public class VideoController(IVideoService fileService, IMapper mapper) : Contro
         model.FileStream = uploadFileVideoRequest.VideoFile.OpenReadStream();
         model.ContentType = uploadFileVideoRequest.VideoFile.ContentType;
         
-        await  fileService.UploadFile(model, cancellationToken);
-        return Ok();
+        var videoId = await fileService.UploadFile(model, cancellationToken);
+        return Ok(videoId);
     }
     
 }

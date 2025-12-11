@@ -25,7 +25,12 @@ public interface IVideoService
     /// <summary>
     /// Загрузить видео в хранилище
     /// </summary>
-    public Task UploadFile(AddFileModel fileModel, CancellationToken cancellationToken);
+    public Task<Guid> UploadFile(AddFileModel fileModel, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Получить hls файла
+    /// </summary>
+    public Task<HlsModel> GetHlsFile(string path, CancellationToken cancellationToken);
     
     /// <summary>
     /// Получить ссылку на скачивание видео
