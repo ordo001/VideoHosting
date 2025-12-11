@@ -1,7 +1,6 @@
 using VideoHostingApi.Common.Entities.Video;
-using VideoHostingApi.Common.Repositories.Contracts;
 
-namespace VideoHostingApi.FileService.Repositories.Contracts;
+namespace VideoHostingApi.Common.Repositories.Contracts;
 
 /// <summary>
 /// Интерфейс для работы с сущностями видео

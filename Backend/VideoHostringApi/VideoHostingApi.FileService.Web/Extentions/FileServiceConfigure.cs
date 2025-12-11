@@ -6,7 +6,6 @@ using VideoHostingApi.Common.Repositories;
 using VideoHostingApi.Common.Repositories.Contracts;
 using VideoHostingApi.Common.Web;
 using VideoHostingApi.FileService.Repositories;
-using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Service;
 using VideoHostingApi.FileService.Service.Contracts;
 

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using VideoHostingApi.Common.Entities.Video;
+using VideoHostingApi.Common.Entities.Video.Enums;
 using VideoHostingApi.Common.Repositories.Contracts;
 using VideoHostingApi.VideoHandler.Services.Contracts;
 using VideoHostingApi.VideoHandler.Services.Contracts.Models;
@@ -9,25 +10,54 @@ namespace VideoHostingApi.VideoHandler.Services;
 /// <summary>
 /// Сервис по обработке видео
 /// </summary>
-public class VideoProcessingService(IObjectStorageRepository<VideoFile> videoObjectStorageRepository) : IVideoProcessingService
+public class VideoProcessingService(IObjectStorageRepository<VideoFile> videoObjectStorageRepository,
+    IVideoFileRepository videoFileRepository, IVideoRepository videoRepository) : IVideoProcessingService
 {
     private static readonly string ffmpegPath = Path.Combine(AppContext.BaseDirectory, "FFmpeg", "ffmpeg.exe");
     public async Task ProcessVideoAsync(Guid videoId, CancellationToken cancellationToken)
     {
+        var video = await videoRepository.GetById(videoId, cancellationToken);
+        if (video is null)
+        {
+            // TODO: Заменить и сделать обработку в middleware
+            throw new Exception($"Видео с идентификатором {videoId} не найдено");
+        }
+
+        video.Status = Status.Processing;
+        videoRepository.Update(video);
+        await  videoRepository.SaveChanges(cancellationToken);
+        
         var path = $"{videoId}/master";
         var stream = await videoObjectStorageRepository.DownloadFile(path, cancellationToken);
         
-        var result = await ProcessAsync(stream.FileStream, cancellationToken);
+        var results = await ProcessAsync(videoId, stream.FileStream, cancellationToken);
         
-        foreach (var file in result.Files.AsEnumerable())
+        foreach (var file in results)
         {
-            await videoObjectStorageRepository.UploadFile($"{videoId}/{file.Key}",file.Value,"application/vnd.apple.mpegurl", cancellationToken);
+            // TODO: Переделать под коллекцию
+            await videoObjectStorageRepository.UploadFile($"{videoId}/{file.Path}",file.Stream!,"application/vnd.apple.mpegurl", cancellationToken);
+            videoFileRepository.Add(new VideoFile
+            {
+                Path = file.Path,
+                VideoId = videoId,
+                Type = file.Type,
+                Quality = file.Quality,
+                Size = file.Size,
+                CreatedAt = video.CreatedAt
+            });
+            video.Status = Status.Ready;
+            videoRepository.Update(video);
+            
+            await videoRepository.SaveChanges(cancellationToken);
         }
+        
+        
+        Directory.Delete(Path.Combine(Path.GetTempPath(), "hls_" + videoId), true);
     }
 
-    private async Task<HlsResult> ProcessAsync(Stream inputStream, CancellationToken cancellationToken)
+    private async Task<List<HlsResult>> ProcessAsync(Guid videoId, Stream inputStream, CancellationToken cancellationToken)
     {
-        var tempDir = Path.Combine(Path.GetTempPath(), "hls_" + Guid.NewGuid());
+        var tempDir = Path.Combine(Path.GetTempPath(), "hls_" + videoId);
 
         Directory.CreateDirectory(tempDir);
         
@@ -76,19 +106,35 @@ public class VideoProcessingService(IObjectStorageRepository<VideoFile> videoObj
             #EXT-X-STREAM-INF:BANDWIDTH=1500000,RESOLUTION=854x480
             480p/index.m3u8
             """, cancellationToken);
-        
-        var result = new HlsResult();
+
+        var result = new List<HlsResult>();
 
         foreach (var file in Directory.GetFiles(tempDir, "*.m3u8", SearchOption.AllDirectories))
         {
             var relative = Path.GetRelativePath(tempDir, file).Replace("\\", "/");
-            result.Files[relative] = await FileToStreamAsync(file);
+            var stream = await FileToStreamAsync(file);
+            result.Add(new HlsResult
+            {
+                Path = relative,
+                Stream = stream,
+                Type = ".m3u8",
+                Size = stream.Length,
+                Quality = Path.GetRelativePath(tempDir, file).Replace("\\", "/").Split('/').First()
+            });
         }
 
         foreach (var ts in Directory.GetFiles(tempDir, "*.ts", SearchOption.AllDirectories))
         {
             var relative = Path.GetRelativePath(tempDir, ts).Replace("\\", "/");
-            result.Files[relative] = await FileToStreamAsync(ts);
+            var stream = await FileToStreamAsync(ts);
+            result.Add(new HlsResult
+            {
+                Path = relative,
+                Stream = stream,
+                Type = ".ts",
+                Size = stream.Length,
+                Quality = Path.GetRelativePath(tempDir, ts).Replace("\\", "/").Split('/').First()
+            });
         }
         
         return  result;

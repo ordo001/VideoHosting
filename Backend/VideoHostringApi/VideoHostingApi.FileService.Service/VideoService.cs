@@ -2,7 +2,6 @@ using AutoMapper;
 using VideoHostingApi.Common.Entities.Video;
 using VideoHostingApi.Common.Entities.Video.Enums;
 using VideoHostingApi.Common.Repositories.Contracts;
-using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Service.Contracts;
 using VideoHostingApi.FileService.Service.Contracts.Models;
 using VideoHostingApi.FileService.Service.Contracts.Models.Events;
@@ -60,17 +59,15 @@ public class VideoService(IObjectStorageRepository<VideoFile> videoObjectStorage
 
     public async Task UploadCompete(Guid videoId, CancellationToken cancellationToken)
     {
-        // var video = await videoRepository.GetById(videoId, cancellationToken);
-        // if (video is null)
-        // {
-        //     throw new FileEntityNotFoundException($"Видео с идентификатором {videoId} не найдено");
-        // }
-        //
-        // video.Status = Status.Uploaded;
-        // videoRepository.Update(video);
-        // await videoRepository.SaveChanges(cancellationToken);
+        var video = await videoRepository.GetById(videoId, cancellationToken);
+        if (video is null)
+        {
+            throw new FileEntityNotFoundException($"Видео с идентификатором {videoId} не найдено");
+        }
         
-        //await messageProducer.SendMessage("video-processing",video.Id);
+        video.Status = Status.Uploaded;
+        videoRepository.Update(video);
+        await videoRepository.SaveChanges(cancellationToken);
         
         await messageProducer.SendMessage("video-processing",new FileUploadedEvent {  VideoId = videoId }, cancellationToken);
 

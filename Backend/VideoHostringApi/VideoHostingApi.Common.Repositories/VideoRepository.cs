@@ -1,12 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using VideoHostingApi.Common.Entities.Video;
-using VideoHostingApi.Common.Repositories;
-using VideoHostingApi.FileService.Context;
-using VideoHostingApi.FileService.Repositories.Contracts;
+using VideoHostingApi.Common.Repositories.Contracts;
+using VideoHostingApi.FileService.Repositories;
 
-namespace VideoHostingApi.FileService.Repositories;
+namespace VideoHostingApi.Common.Repositories;
 
-public class VideoRepository(FileServiceContext context) : WriteRepositoryBase<Video>(context), IVideoRepository, IFileRepositoryAnchor
+public class VideoRepository(DbContext context) : WriteRepositoryBase<Video>(context), IVideoRepository, IFileRepositoryAnchor
 {
     public async Task<Video?> GetById(Guid id, CancellationToken cancellationToken)
     {

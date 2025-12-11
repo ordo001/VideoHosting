@@ -23,7 +23,7 @@ public class Program
         var fileConnectionString = builder.Configuration.GetConnectionString("FileDbConnection");
 
         builder.Services.AddDbContext<AuthContext>(x => x.UseNpgsql(authConnectionString));
-        builder.Services.AddDbContext<FileServiceContext>(x => x.UseNpgsql(fileConnectionString));
+        builder.Services.AddDbContext<DbContext,FileServiceContext>(x => x.UseNpgsql(fileConnectionString));
         
         builder.Services.ConfigureFileService(builder.Configuration);
         builder.Services.ConfigureAuthService();

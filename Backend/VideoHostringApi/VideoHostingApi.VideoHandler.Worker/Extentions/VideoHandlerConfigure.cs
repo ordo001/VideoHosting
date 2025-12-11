@@ -22,6 +22,8 @@ public static class VideoHandlerConfigure
     {
         services.AddScoped<IMessageHandler<VideoProcessingMessage>, VideoProcessingHandler>();
         services.AddScoped<IVideoProcessingService, VideoProcessingService>();
+        services.AddScoped<IVideoRepository, VideoRepository>();
+        services.AddScoped<IVideoFileRepository, VideoFileRepository>();
         services.AddSingleton<IMessageConsumer<VideoProcessingMessage>, RabbitMqMessageConsumer<VideoProcessingMessage>>();
         
         var minioClient = new MinioClient()

@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VideoHostingApi.FileService.Service.Contracts;
 using VideoHostingApi.FileService.Service.Contracts.Models;

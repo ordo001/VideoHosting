@@ -12,7 +12,7 @@ public class Program
         var builder = Host.CreateApplicationBuilder(args);
         
         var fileConnectionString = builder.Configuration.GetConnectionString("FileDbConnection");
-        builder.Services.AddDbContext<VideoHandlerContext>(x => x.UseNpgsql(fileConnectionString));
+        builder.Services.AddDbContext<DbContext,VideoHandlerContext>(x => x.UseNpgsql(fileConnectionString));
         
         builder.Services.ConfigureVideoHandler(builder.Configuration);
         builder.Services.RegisterAutoMapper();

@@ -1,4 +1,3 @@
-using VideoHostingApi.FileService.Repositories.Contracts;
 using VideoHostingApi.FileService.Service.Contracts.Models;
 
 namespace VideoHostingApi.FileService.Service.Contracts;
